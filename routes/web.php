@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +17,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+
+
+
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/admin/utilisateur', [AdminUtilisateur::class, 'show']);
+
+    Route::get('/admin/utilisateur/new', [AdminUtilisateur::class, 'create']);
+
+    Route::get('/admin/utilisateur/{id}', [AdminUtilisateur::class, 'show_id']);
+
+    Route::get('/admin/utilisateur/{id}/edit', [AdminUtilisateur::class, 'edit']);
+
+    // path form requests: /admin/utilisateur
+    Route::post('/admin/utilisateur/new/submit', [AdminUtilisateurFom::class, 'create']);
+
+    Route::post('/admin/utilisateur/edit', [AdminUtilisateurFom::class, 'update']);
+
+    Route::delete('/admin/utilisateur/delete', [AdminUtilisateurFom::class, 'delete']);
 });
-
-require __DIR__.'/auth.php';
