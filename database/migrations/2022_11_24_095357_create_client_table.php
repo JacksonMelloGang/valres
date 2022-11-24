@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('reponsable', function (Blueprint $table) {
+        Schema::create('client', function (Blueprint $table) {
             $table->unsignedBigInteger('utilisateur_id');
-            $table->text('username');
-            $table->text('password');
-
-
-            $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');
+            $table->unsignedBigInteger('structure_id');
+            $table->foreign('utilisateur_id')->references('id')->on('utilisateur')->onDelete('cascade');
+            $table->foreign('structure_id')->references('id')->on('structure')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reponsable');
+        Schema::dropIfExists('client');
     }
 };

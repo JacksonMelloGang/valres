@@ -19,7 +19,10 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('mail');
 
-            $table->timestamp('created_at');
+            $table->string('username');
+            $table->string('password');
+
+            $table->timestamp('created_at')->useCurrent();
         });
     }
 

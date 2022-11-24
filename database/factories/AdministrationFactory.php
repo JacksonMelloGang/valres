@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class SecretariatFactory extends Factory
+class AdministrationFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,6 +21,7 @@ class SecretariatFactory extends Factory
             'utilisateur_id' => $this->faker->unique()->numberBetween(1, 7),
             'username' => $this->faker->unique()->userName(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'service_id' => $this->faker->numberBetween(1, 3),
         ];
     }
 }

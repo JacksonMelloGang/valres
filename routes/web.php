@@ -15,27 +15,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('login');
+
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
+
+
+
+Route::group(['middleware' => ['check_reservant']], function(){
+    Route::get('/reservations', function(){
+        return view('reservations');
+    })->name('reservations');
 });
 
 
+Route::group(['middleware' => ['admin_auth']], function () {
+    Route::get('/admin/user', [AdminUtilisateur::class, 'show']);
 
+    Route::get('/admin/user/new', [AdminUtilisateur::class, 'create']);
 
+    Route::get('/admin/user/{id}', [AdminUtilisateur::class, 'show_id']);
 
+    Route::get('/admin/user/{id}/edit', [AdminUtilisateur::class, 'edit']);
 
+    // path form requests: /admin/user
+    Route::post('/admin/user/new/submit', [AdminUtilisateurFom::class, 'create']);
 
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/admin/utilisateur', [AdminUtilisateur::class, 'show']);
+    Route::post('/admin/user/edit', [AdminUtilisateurFom::class, 'update']);
 
-    Route::get('/admin/utilisateur/new', [AdminUtilisateur::class, 'create']);
-
-    Route::get('/admin/utilisateur/{id}', [AdminUtilisateur::class, 'show_id']);
-
-    Route::get('/admin/utilisateur/{id}/edit', [AdminUtilisateur::class, 'edit']);
-
-    // path form requests: /admin/utilisateur
-    Route::post('/admin/utilisateur/new/submit', [AdminUtilisateurFom::class, 'create']);
-
-    Route::post('/admin/utilisateur/edit', [AdminUtilisateurFom::class, 'update']);
-
-    Route::delete('/admin/utilisateur/delete', [AdminUtilisateurFom::class, 'delete']);
+    Route::delete('/admin/user/delete', [AdminUtilisateurFom::class, 'delete']);
 });

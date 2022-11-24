@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('secretariat', function (Blueprint $table) {
-            $table->unsignedBigInteger('utilisateur_id');
-            $table->text('username');
-            $table->text('password');
-
-
-            $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');
+        Schema::create('reservation', function (Blueprint $table) {
+            $table->id('reservation_id');
+            $table->foreignId('utilisateur_id')->constrained('utilisateur');
+            $table->foreignId('salle_id')->constrained('salle');
+            $table->dateTime('date_reservation');
+            $table->integer('reservation_periode');
         });
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('secretariat');
+        Schema::dropIfExists('reservation');
     }
 };

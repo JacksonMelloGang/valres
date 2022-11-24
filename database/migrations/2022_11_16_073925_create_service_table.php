@@ -13,13 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('administrateur', function (Blueprint $table) {
-            $table->unsignedBigInteger('utilisateur_id');
-            $table->text('username');
-            $table->text('password');
-
-
-            $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');
+        Schema::create('service', function (Blueprint $table) {
+            $table->id('id_service');
+            $table->string('libelle');
+            $table->timestamps();
         });
     }
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('administrateur');
+        Schema::dropIfExists('service');
     }
 };
