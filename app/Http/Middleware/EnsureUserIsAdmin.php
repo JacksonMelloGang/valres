@@ -18,7 +18,10 @@ class EnsureUserIsAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = Administration::find($request->session()->get('utilisateur_id'));
-        ddd($user);
+
+        if(!$user){
+            return redirect()->route('login');
+        }
 
         if(!$user->isAdministrateur()){
             abort(403, 'not allowed to access this page');

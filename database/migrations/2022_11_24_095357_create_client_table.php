@@ -16,8 +16,9 @@ return new class extends Migration
         Schema::create('client', function (Blueprint $table) {
             $table->unsignedBigInteger('utilisateur_id');
             $table->unsignedBigInteger('structure_id');
-            $table->foreign('utilisateur_id')->references('id')->on('utilisateur')->onDelete('cascade');
-            $table->foreign('structure_id')->references('id')->on('structure')->onDelete('cascade');
+
+            $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur')->onDelete('cascade');
+            $table->foreign('structure_id')->references('structure_id')->on('structure')->onDelete('cascade');
             $table->timestamps();
         });
     }

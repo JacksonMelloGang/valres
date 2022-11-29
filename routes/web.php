@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\LoginController;
+use \App\Http\Controllers\AdminUtilisateur;
+use \App\Http\Controllers\AdminUtilisateurForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +16,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('login');
+Route::get('/', [LoginController::class, 'show'])->name('login');
+
+
+Route::post('/', [LoginController::class, 'attempt_login'])->name('attempt_login');
+
 
 Route::get('/home', function () {
     return view('home');
-})->name('home');
+})->name('home')->middleware('auth');
 
 
 
@@ -40,7 +45,7 @@ Route::group(['middleware' => ['admin_auth']], function () {
     Route::get('/admin/user/{id}/edit', [AdminUtilisateur::class, 'edit']);
 
     // path form requests: /admin/user
-    Route::post('/admin/user/new/submit', [AdminUtilisateurFom::class, 'create']);
+    Route::put('/admin/user/new/submit', [AdminUtilisateurFom::class, 'create']);
 
     Route::post('/admin/user/edit', [AdminUtilisateurFom::class, 'update']);
 
