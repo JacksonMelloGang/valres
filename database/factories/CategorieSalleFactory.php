@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategorieSalleFactory extends Factory
 {
+
+    protected $model = \App\Models\Categorie_salle::class;
+
     /**
      * Define the model's default state.
      *

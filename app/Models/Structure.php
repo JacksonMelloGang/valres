@@ -12,6 +12,7 @@ class Structure extends Model
     protected $table = 'structure';
 
     protected $primaryKey = 'structure_id';
+    public $timestamp = false;
 
     protected $fillable = [
         'structure_nom',

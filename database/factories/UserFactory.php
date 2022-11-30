@@ -18,10 +18,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'nom' => fake()->name(),
+            'prenom' => fake()->firstName(),
+            'mail' => fake()->unique()->safeEmail(),
+            'username' => fake()->unique()->userName(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'is_banned' => fake()->boolean(),
         ];
     }
 
@@ -36,4 +38,6 @@ class UserFactory extends Factory
             //'email_verified_at' => null,
         ]);
     }
+
+
 }

@@ -12,8 +12,15 @@ class Categorie_structure extends Model
     protected $table = 'categorie_structure';
 
     protected $primaryKey = 'categorie_id';
+    public $timestamp = false;
+
 
     protected $fillable = [
         'libelle ',
     ];
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\CategorieStructureFactory::new();
+    }
 }

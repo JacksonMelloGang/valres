@@ -26,7 +26,7 @@ class LoginController extends Controller
         // attempt to login with username and password
         $credentials = $request->only('username', 'password');
 
-        if(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])){
+        if(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password'], 'is_banned' => 0])){
             $request->session()->regenerate();
 
             return redirect()->intended('home');

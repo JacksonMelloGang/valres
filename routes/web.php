@@ -28,14 +28,14 @@ Route::get('/home', function () {
 
 
 
-Route::group(['middleware' => ['check_reservant']], function(){
+Route::group(['middleware' => ['auth', 'check_reservant']], function(){
     Route::get('/reservations', function(){
         return view('reservations');
     })->name('reservations');
 });
 
 
-Route::group(['middleware' => ['admin_auth']], function () {
+Route::group(['middleware' => ['auth', 'admin_auth']], function () {
     Route::get('/admin/user', [AdminUtilisateur::class, 'show']);
 
     Route::get('/admin/user/new', [AdminUtilisateur::class, 'create']);

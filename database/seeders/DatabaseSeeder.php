@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
 
         \App\Models\User::factory(7)->create();
 
+
         \App\Models\Service::factory()->create([
             'libelle' => 'Administrateur',
         ]);
@@ -36,5 +37,14 @@ class DatabaseSeeder extends Seeder
             'libelle' => 'Secretariat',
         ]);
 
+        \App\Models\Categorie_salle::factory(3)->create();
+
+        \App\Models\Salle::factory(10)->create();
+
+        \App\Models\Categorie_structure::factory(3)->create();
+
+        \App\Models\Structure::factory(10)->create();
+
+        \App\Models\Reservation::factory(10)->create();
     }
 }

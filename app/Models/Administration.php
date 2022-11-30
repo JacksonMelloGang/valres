@@ -12,14 +12,15 @@ class Administration extends Model
 
     protected $table = 'administration';
 
-    protected $primaryKey = 'utilisateur_id';
+    public $timestamp = false;
+
+
+    //protected $primaryKey = ['utilisateur_id', 'service_id'];
 
     protected $fillable = [
-        'username'
     ];
 
     protected $hidden = [
-        'password'
     ];
 
     public function utilisateur(){
@@ -31,7 +32,15 @@ class Administration extends Model
     }
 
     public function isAdministrateur(){
-        return $this->service_id == 1;
+        // get service from service table based on service_id
+        $service = Service::find($this->service_id);
+        // check if service is Administrateur
+
+        if($service->libelle == 'Administrateur'){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function isResponsable(){
