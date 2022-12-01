@@ -20,16 +20,20 @@ Route::get('/', function(){
     return redirect('/login');
 });
 
+/** Login & Logout Routes **/
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+/** Home for all users **/
 Route::get('/dashboard', function () {
     return view('home');
 })->name('home')->middleware('auth');
 
 
 
+/** Reservations **/
 Route::group(['middleware' => ['auth', 'check_reservant']], function(){
     Route::get('/reservations', function(){
         return view('reservations');
@@ -37,12 +41,13 @@ Route::group(['middleware' => ['auth', 'check_reservant']], function(){
 });
 
 
+/** Admin Routes (Manage Users) **/
 Route::group(['middleware' => ['auth', 'admin_auth']], function () {
-    Route::get('/admin/user', [AdminUtilisateur::class, 'show']);
-
-    Route::get('/admin/user/new', [AdminUtilisateur::class, 'create']);
+    Route::get('/admin/users', [AdminUtilisateur::class, 'show']);
 
     Route::get('/admin/user/{id}', [AdminUtilisateur::class, 'show_id']);
+
+    Route::get('/admin/user/new', [AdminUtilisateur::class, 'create']);
 
     Route::get('/admin/user/{id}/edit', [AdminUtilisateur::class, 'edit']);
 
