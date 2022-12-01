@@ -18,8 +18,8 @@ class SalleFactory extends Factory
     {
         return [
             //
-            'salle_nom' => $this->faker->unique()->company(),
-            'cat_id' => $this->faker->unique()->numberBetween(1, 3),
+            'salle_nom' => $this->faker->unique()->firstName(),
+            'cat_id' => $this->faker->numberBetween(1, 3)
         ];
     }
 }

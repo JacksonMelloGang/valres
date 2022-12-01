@@ -16,13 +16,15 @@ use \App\Http\Controllers\AdminUtilisateurForm;
 |
 */
 
-Route::get('/', [LoginController::class, 'show'])->name('login');
+Route::get('/', function(){
+    return redirect('/login');
+});
 
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::post('/', [LoginController::class, 'attempt_login'])->name('attempt_login');
-
-
-Route::get('/home', function () {
+Route::get('/dashboard', function () {
     return view('home');
 })->name('home')->middleware('auth');
 

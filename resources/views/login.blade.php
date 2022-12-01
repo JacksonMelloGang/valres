@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-
     <div>
         <h1>Valres</h1>
         <h2>Reservation</h2>

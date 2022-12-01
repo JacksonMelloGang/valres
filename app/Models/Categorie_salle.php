@@ -12,7 +12,7 @@ class Categorie_salle extends Model
     protected $table = 'categorie_salle';
 
     protected $primaryKey = 'categorie_id';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'libelle ',

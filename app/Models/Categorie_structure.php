@@ -12,7 +12,7 @@ class Categorie_structure extends Model
     protected $table = 'categorie_structure';
 
     protected $primaryKey = 'categorie_id';
-    public $timestamp = false;
+    public $timestamps  = false;
 
 
     protected $fillable = [

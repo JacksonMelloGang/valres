@@ -10,6 +10,12 @@ class LoginController extends Controller
     //
 
     function show(){
+
+        // if user already logged
+        if(Auth::check()){
+            return redirect()->intended('/dashboard');
+        }
+
         return view('login', [
             "title" => "Login"
         ]);
@@ -39,5 +45,11 @@ class LoginController extends Controller
             'error' => 'The provided credentials do not match our records.',
         ])->onlyInput('username');
 
+    }
+
+    function logout(){
+        Auth::logout();
+
+        return redirect()->intended('login');
     }
 }

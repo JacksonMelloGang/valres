@@ -21,7 +21,6 @@ class CategorieSalleFactory extends Factory
     {
         return [
             //
-            'catid' => $this->faker->unique()->numberBetween(1, 7),
             'libelle' => $this->faker->unique()->text(),
         ];
     }

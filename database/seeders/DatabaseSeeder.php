@@ -21,30 +21,16 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\User::factory(7)->create();
+        $this->call([
 
+            CategorieSeeder::class,
+            SalleSeeder::class,
+            StructureSeeder::class,
 
-        \App\Models\Service::factory()->create([
-            'libelle' => 'Administrateur',
+            ServiceSeeder::class,
+            UserSeeder::class,
+            ReservationSeeder::class
         ]);
 
-        \App\Models\Service::factory()->create([
-            'libelle' => 'Reponsable',
-        ]);
-
-
-        \App\Models\Service::factory()->create([
-            'libelle' => 'Secretariat',
-        ]);
-
-        \App\Models\Categorie_salle::factory(3)->create();
-
-        \App\Models\Salle::factory(10)->create();
-
-        \App\Models\Categorie_structure::factory(3)->create();
-
-        \App\Models\Structure::factory(10)->create();
-
-        \App\Models\Reservation::factory(10)->create();
     }
 }
