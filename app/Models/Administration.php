@@ -12,7 +12,7 @@ class Administration extends Model
 
     protected $table = 'administration';
 
-    public $timestamp = false;
+    public $timestamps = false;
 
 
     //protected $primaryKey = ['utilisateur_id', 'service_id'];

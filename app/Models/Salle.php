@@ -12,7 +12,7 @@ class Salle extends Model
     protected $table = 'salle';
 
     protected $primaryKey = 'salle_id';
-    public $timestamp = false;
+    public $timestamps = false;
 
     protected $fillable = [
         'salle_nom',

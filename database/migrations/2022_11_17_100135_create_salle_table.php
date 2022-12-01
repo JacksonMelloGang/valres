@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('salle_nom');
             $table->unsignedBigInteger('cat_id');
 
-            $table->foreign('cat_id')->references('cat_id')->on('categorie_salle');
+            $table->foreign('cat_id')->references('cat_id')->on('categorie_salle')->onDelete('CASCADE');
         });
     }
 

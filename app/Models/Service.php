@@ -12,7 +12,7 @@ class Service extends Model
     protected $table = 'service';
 
     protected $primary_key = 'id_service';
-    public $timestamp = false;
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.

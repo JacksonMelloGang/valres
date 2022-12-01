@@ -20,7 +20,7 @@ class StructureFactory extends Factory
             //
             'structure_nom' => $this->faker->unique()->company(),
             'structure_adresse' => $this->faker->unique()->address(),
-            'structure_categorie' => $this->faker->unique()->numberBetween(1, 7),
+            'categorie_id' => $this->faker->numberBetween(1, 3),
 
         ];
     }
