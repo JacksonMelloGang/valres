@@ -19,12 +19,18 @@ use \App\Http\Controllers\AdminUtilisateurForm;
 Route::get('/', function(){
     return redirect('/login');
 });
+Route::get('/', function(){
+    return redirect('/login');
+});
 
 /** Login & Logout Routes **/
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::get('/login', [LoginController::class, 'show'])->name('login');
+Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /** Home for all users **/
 Route::get('/dashboard', function () {
