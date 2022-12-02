@@ -14,7 +14,6 @@ class Categorie_structure extends Model
     protected $primaryKey = 'categorie_id';
     public $timestamps  = false;
 
-
     protected $fillable = [
         'libelle ',
     ];

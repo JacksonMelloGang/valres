@@ -13,6 +13,8 @@ class Reservation extends Model
 
     protected $primaryKey = 'reservation_id';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'date_debut',
         'reservation_periode',
@@ -29,4 +31,12 @@ class Reservation extends Model
         return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
     }
 
+<<<<<<< HEAD
+    protected static function newFactory()
+    {
+        return \Database\Factories\ReservationFactory::new();
+    }
+
+=======
+>>>>>>> 409a90e5b36d68b8e2946772db557d514edab4fe
 }

@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         $this->call([
-
             CategorieSeeder::class,
             SalleSeeder::class,
             StructureSeeder::class,
