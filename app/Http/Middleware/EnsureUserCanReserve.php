@@ -18,6 +18,8 @@ class EnsureUserCanReserve
     public function handle(Request $request, Closure $next)
     {
 
+        $ok = false;
+
         if($request->user() == null){
             return redirect()->route('login')->withErrors([
                 'error' => 'You must be logged in to access this page.',
@@ -32,13 +34,22 @@ class EnsureUserCanReserve
 
 
         if($user == null){
-            return abort(403, 'Not allowed to access this page, (user not found in administration table)');
+            return abort(403, 'Not allowed to access this page');
         } else {
-            if(!$user->isSecretaire() || !$user->isResponsable()){
-                return abort(403, 'Not allowed to Reserve');
+
+            if($user->isAdministrateur()){
+                $ok = true;
+            }
+
+            if($user->isResponsable()){
+                $ok = true;
             }
         }
 
-        return $next($request);
+        if($ok){
+            return $next($request);
+        } else {
+            return abort(403, 'Not allowed to access this page');
+        }
     }
 }

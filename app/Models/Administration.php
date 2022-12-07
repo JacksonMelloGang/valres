@@ -34,8 +34,8 @@ class Administration extends Model
     public function isAdministrateur(){
         // get service from service table based on service_id
         $service = Service::find($this->service_id);
-        // check if service is Administrateur
 
+        // check if service is Administrateur
         if($service->libelle == 'Administrateur'){
             return true;
         } else {
@@ -43,11 +43,32 @@ class Administration extends Model
         }
     }
 
+
+    // method to check if user is Responsable by checking if libelle of service id is Responsable
     public function isResponsable(){
-        return $this->service_id != 2;
+        // get service from service table based on service_id
+        $service = Service::find($this->service_id);
+
+
+        // check if service is Responsable
+        if($service->libelle == 'Responsable'){
+            return true;
+        } else {
+            return false;
+        }
     }
 
+
     public function isSecretaire(){
-        return $this->service_id == 3;
+        // get service from service table based on service_id
+        $service = Service::find($this->service_id);
+
+        // check if service is Secretaire
+        if($service->libelle == 'Secretaire'){
+            return true;
+        } else {
+            return false;
+        }
     }
+
 }

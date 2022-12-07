@@ -46,5 +46,53 @@ class User extends Authenticatable
         //'email_verified_at' => 'datetime',
     ];
 
+    public function isAdministrateur(){
+        // get service from administration table based on utilisateur_id
+        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+
+        if($administration == null){
+            return false;
+        }
+
+        // check if administration is Administrateur
+        if($administration->isAdministrateur()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isResponsable(){
+        // get service from administration table based on utilisateur_id
+        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+
+        if($administration == null){
+            return false;
+        }
+
+
+        // check if administration is Responsable
+        if($administration->isResponsable()){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isSecretaire(){
+        // get service from administration table based on utilisateur_id
+        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+
+        if($administration == null){
+            return false;
+        }
+
+        // check if administration is Secretaire
+        if($administration->isSecretaire()){
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 }

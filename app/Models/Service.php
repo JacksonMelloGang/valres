@@ -11,7 +11,7 @@ class Service extends Model
 
     protected $table = 'service';
 
-    protected $primary_key = 'id_service';
+    protected $primaryKey = 'id_service';
     public $timestamps = false;
 
     /**

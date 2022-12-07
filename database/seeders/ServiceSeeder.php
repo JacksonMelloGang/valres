@@ -20,7 +20,7 @@ class ServiceSeeder extends Seeder
         ]);
 
         \App\Models\Service::factory()->create([
-            'libelle' => 'Reponsable',
+            'libelle' => 'Responsable',
         ]);
 
 

@@ -4,7 +4,7 @@
         <h1>Valres</h1>
         <h2>Reservation</h2>
         <h3>Log in</h3>
-        <form action="/" method="POST">
+        <form action="/login" method="POST">
             @csrf
             <input type="text" name="username" placeholder="Username">
             <input type="password" name="password" placeholder="Password">

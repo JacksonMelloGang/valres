@@ -20,6 +20,7 @@ return new class extends Migration
             $table->dateTime('date_reservation');
             $table->integer('reservation_periode');
             $table->string('reservation_commentaire');
+            $table->string('status'); // provisoire, confirmé, annulé
             $table->timestamp('created_at')->useCurrent();
 
             $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');

@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
-use \App\Http\Controllers\AdminUtilisateur;
+use \App\Http\Controllers\AdminUtilisateurController;
 use \App\Http\Controllers\AdminUtilisateurForm;
+use \App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,36 +20,60 @@ use \App\Http\Controllers\AdminUtilisateurForm;
 Route::get('/', function(){
     return redirect('/login');
 });
-Route::get('/', function(){
-    return redirect('/login');
-});
 
 /** Login & Logout Routes **/
 Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/login', [LoginController::class, 'show'])->name('login');
-Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
-
 /** Home for all users **/
 Route::get('/dashboard', function () {
+    dd(Auth::user()->isAdmin());
+
     return view('home');
-})->name('home')->middleware('auth');
+})->name('dashboard')->middleware('auth');
 
 
 
 /** Reservations **/
-Route::group(['middleware' => ['auth', 'check_reservant']], function(){
+Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
     Route::get('/reservations', function(){
         return view('reservations');
     })->name('reservations');
+
+    Route::get('/reservation/create', [ReservationController::class, 'create'])->name('reservation_create');
+
+    Route::get('/reservation/{id}', [ReservationController::class, 'show_id'])->name('reservation_show');
+
+    Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation_edit');
+
+    Route::get('/reservation/{id}/delete', function($id){
+        return view('reservations_delete', ['id' => $id]);
+    })->name('reservation_delete');
+
+    Route::get('/reservation/{id}/validate', function($id){
+        return view('reservations_validate', ['id' => $id]);
+    })->name('reservation_validate');
+
+
+    /** FORM REQUEST /reservation/  **/
+
+    Route::post('/reservation/create', [ReservationController::class, 'create_form'])->name('reservation_create');
+
+    Route::post('/reservation/{id}/edit', function($id){
+        return view('reservations_edit', ['id' => $id]);
+    })->name('reservation_edit_post');
+
+    Route::post('/reservation/{id}/delete', function($id){
+        return view('reservations_delete', ['id' => $id]);
+    })->name('reservation_delete_post');
+
+
 });
 
 
 /** Admin Routes (Manage Users) **/
-Route::group(['middleware' => ['auth', 'admin_auth']], function () {
+Route::group(['middleware' => ['auth', 'admin.auth']], function () {
     Route::get('/admin/users', [AdminUtilisateur::class, 'show']);
 
     Route::get('/admin/user/{id}', [AdminUtilisateur::class, 'show_id']);
