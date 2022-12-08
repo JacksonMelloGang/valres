@@ -39,10 +39,21 @@
                     <div>{{ $user->username }}</div>
                 </td>
                 <td class="table-text">
-                    <div>{{ $user->is_banned }}</div>
+                    @if($user->is_banned == 1)
+                        <div>Oui</div>
+                    @else
+                        <div>Non</div>
+                    @endif
                 </td>
                 <td class="table-text">
-                    <div>{{  }}</div>
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Actions
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/edit') }}">Modifier</a></li>
+                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/delete') }}">Supprimer</a></li>
+                        </ul>
+                    </div>
                 </td>
             </tr>
 

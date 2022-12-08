@@ -25,14 +25,17 @@ class LoginController extends Controller
         // validate request otherwise return to login page with error message
         $request->validate([
             'username' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'remember' => 'boolean'
         ]);
 
+        // check if remember me is checked
+        $remember = $request->remember ? true : false;
 
-        // attempt to login with username and password
+        // attempt to log in with username and password
         $credentials = $request->only('username', 'password');
 
-        if(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password'], 'is_banned' => 0])){
+        if(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password'], 'is_banned' => 0], $remember)){
             $request->session()->regenerate();
 
             return redirect()->intended('dashboard');

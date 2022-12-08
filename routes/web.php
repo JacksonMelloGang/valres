@@ -39,9 +39,8 @@ Route::get('/dashboard', function () {
 
 /** Reservations - MIDDLEWARE: AUTH & CAN RESERVE **/
 Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
-    Route::get('/reservations', function(){
-        return view('reservations');
-    })->name('reservations');
+
+    Route::get('/reservations', [ReservationController::class, 'show'])->name('reservations');
 
     Route::get('/reservation/create', [ReservationController::class, 'create'])->name('reservation_create');
 
@@ -55,7 +54,7 @@ Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
 
 
     /** FORM REQUEST /reservation/{create|edit|delete}  **/
-    Route::post('/reservation/create', [ReservationControllerForm::class, 'create_form'])->name('reservation_create');
+    Route::put('/reservation/create', [ReservationControllerForm::class, 'create_form'])->name('reservation_create');
 
     Route::post('/reservation/{id}/edit', [ReservationControllerForm::class, 'edit'])->name('reservation_edit');
 
@@ -75,7 +74,7 @@ Route::group(['middleware' => ['auth', 'admin.auth']], function () {
 
 
     // path form requests: /admin/user
-    Route::put('/admin/user/new/submit', [AdminUtilisateurFormController::class, 'create']);
+    Route::put('/admin/user/create', [AdminUtilisateurFormController::class, 'create']);
 
     Route::post('/admin/user/edit', [AdminUtilisateurFormController::class, 'update']);
 

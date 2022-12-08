@@ -13,13 +13,13 @@ class ReservationController extends Controller
         // get all reservations
         $reservations = Reservation::all();
 
-        return view('reservations_show', ['reservations' => $reservations]);
+        return view('reserv.reservations', ['reservations' => $reservations]);
     }
 
     public function show_id($id){
         $reservation = Reservation::findOrFail($id); // return 404 if not found
 
 
-        return view('reservation', ['id' => $id, 'reservation' => $reservation]);
+        return view('reserv.reservation', ['id' => $id, 'reservation' => $reservation]);
     }
 }
