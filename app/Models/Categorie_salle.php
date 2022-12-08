@@ -18,6 +18,10 @@ class Categorie_salle extends Model
         'libelle ',
     ];
 
+    public function salles(){
+        return $this->hasMany(Salle::class, 'categorie_id');
+    }
+
     protected static function newFactory()
     {
         return \Database\Factories\CategorieSalleFactory::new();

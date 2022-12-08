@@ -18,6 +18,7 @@ class ReservationStatutFactory extends Factory
     {
         return [
             //
+            'libelle' => $this->faker->unique()->word(),
         ];
     }
 }

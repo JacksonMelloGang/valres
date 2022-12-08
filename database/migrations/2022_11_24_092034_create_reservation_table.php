@@ -20,12 +20,13 @@ return new class extends Migration
             $table->dateTime('date_reservation');
             $table->integer('reservation_periode');
             $table->string('reservation_commentaire');
-            $table->string('status'); // provisoire, confirmé, annulé
-            $table->timestamp('created_at')->useCurrent();
+            $table->unsignedBigInteger('reservation_statut'); // provisoire, confirmé, annulé
 
             $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');
             $table->foreign('salle_id')->references('salle_id')->on('salle');
+            $table->foreign('reservation_statut')->references('reservation_statut_id')->on('reservation_statut');
 
+            $table->timestamps();
         });
     }
 

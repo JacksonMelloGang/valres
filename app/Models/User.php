@@ -25,6 +25,7 @@ class User extends Authenticatable
         'nom',
         'prenom',
         'mail',
+        'role_id'
     ];
 
     /**
@@ -48,51 +49,51 @@ class User extends Authenticatable
 
     public function isAdministrateur(){
         // get service from administration table based on utilisateur_id
-        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+        $role = Role::where('id_role', $this->role_id)->first();
 
-        if($administration == null){
+        if($role == null){
             return false;
         }
 
-        // check if administration is Administrateur
-        if($administration->isAdministrateur()){
+        // check if libelle of role is Administrateur
+        if($role->libelle == 'Administrateur'){
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function isResponsable(){
         // get service from administration table based on utilisateur_id
-        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+        $role = Role::where('id_role', $this->role_id)->first();
 
-        if($administration == null){
+        if($role == null){
             return false;
         }
 
 
-        // check if administration is Responsable
-        if($administration->isResponsable()){
+        // check if libelle of role is Responsable
+        if($role->libelle == 'Responsable'){
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     public function isSecretaire(){
         // get service from administration table based on utilisateur_id
-        $administration = Administration::where('utilisateur_id', $this->utilisateur_id)->first();
+        $role = Role::where('id_role', $this->role_id)->first();
 
-        if($administration == null){
+        if($role == null){
             return false;
         }
 
-        // check if administration is Secretaire
-        if($administration->isSecretaire()){
+        // check if role of libelle is Secretaire
+        if($role->libelle == 'Secretaire'){
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
 }

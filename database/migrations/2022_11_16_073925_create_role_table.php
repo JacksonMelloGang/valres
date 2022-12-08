@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('service', function (Blueprint $table) {
-            $table->id('id_service');
+        Schema::create('role', function (Blueprint $table) {
+            $table->id('id_role');
             $table->string('libelle');
             $table->timestamps();
         });

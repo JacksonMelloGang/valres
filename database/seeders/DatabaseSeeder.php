@@ -26,8 +26,10 @@ class DatabaseSeeder extends Seeder
             SalleSeeder::class,
             StructureSeeder::class,
 
-            ServiceSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
+
+            ReservationStatutSeeder::class,
             ReservationSeeder::class
         ]);
 

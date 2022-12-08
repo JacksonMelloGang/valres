@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layout')
 @section('content')
     <div>
         <h1>Valres</h1>

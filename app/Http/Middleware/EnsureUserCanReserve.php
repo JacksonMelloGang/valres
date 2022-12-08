@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Administration;
+use App\Models\Role;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -17,39 +17,21 @@ class EnsureUserCanReserve
      */
     public function handle(Request $request, Closure $next)
     {
-
-        $ok = false;
-
         if($request->user() == null){
             return redirect()->route('login')->withErrors([
                 'error' => 'You must be logged in to access this page.',
             ]);
         }
 
-        // get utilisateur_id from auth
-        $utilisateur_id = $request->user()->utilisateur_id;
+        // get user
+        $user = $request->user();
 
-        // find administreur in administration model
-        $user = Administration::where('utilisateur_id', $utilisateur_id)->first();
-
-
-        if($user == null){
-            return abort(403, 'Not allowed to access this page');
-        } else {
-
-            if($user->isAdministrateur()){
-                $ok = true;
-            }
-
-            if($user->isResponsable()){
-                $ok = true;
-            }
-        }
-
-        if($ok){
+        // if responsable or secretariat, process request otherwise return 403 forbidden
+        if($user->isResponsable() || $user->isSecretaire()){
             return $next($request);
-        } else {
-            return abort(403, 'Not allowed to access this page');
         }
+
+
+        return abort(403, 'Not allowed to access this page');
     }
 }

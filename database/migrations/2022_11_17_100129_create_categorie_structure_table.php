@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categorie_structure', function (Blueprint $table) {
             $table->id('categorie_id');
-            $table->text('libelle');
+            $table->string('libelle', 50);
         });
     }
 

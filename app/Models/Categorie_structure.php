@@ -18,6 +18,10 @@ class Categorie_structure extends Model
         'libelle ',
     ];
 
+    public function structures(){
+        return $this->hasMany(Structure::class, 'categorie_id');
+    }
+
     protected static function newFactory()
     {
         return \Database\Factories\CategorieStructureFactory::new();

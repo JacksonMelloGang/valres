@@ -20,7 +20,7 @@ class CategorieStructureFactory extends Factory
     {
         return [
             //
-            'libelle' => $this->faker->unique()->text(),
+            'libelle' => $this->faker->unique()->word(),
         ];
     }
 }

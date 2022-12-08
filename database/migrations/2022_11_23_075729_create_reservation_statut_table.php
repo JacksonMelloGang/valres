@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categorie_salle', function (Blueprint $table) {
-            $table->id('cat_id');
-            $table->string('libelle', 50);
+        Schema::create('reservation_statut', function (Blueprint $table) {
+            $table->id('reservation_statut_id');
+            $table->string('libelle');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorie');
+        Schema::dropIfExists('reservation_statut');
     }
 };

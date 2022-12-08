@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ServiceSeeder extends Seeder
+class RoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,16 @@ class ServiceSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\Service::factory()->create([
+        \App\Models\Role::factory()->create([
             'libelle' => 'Administrateur',
         ]);
 
-        \App\Models\Service::factory()->create([
+        \App\Models\Role::factory()->create([
             'libelle' => 'Responsable',
         ]);
 
 
-        \App\Models\Service::factory()->create([
+        \App\Models\Role::factory()->create([
             'libelle' => 'Secretariat',
         ]);
     }

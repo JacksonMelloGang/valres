@@ -13,11 +13,13 @@ class ReservationStatut extends Model
 
     protected $primaryKey = 'reservation_statut_id';
 
+    public $timestamps = false;
+
     protected $fillable = [
         'libelle',
     ];
 
-    public function reservation(){
+    public function reservations(){
         return $this->hasMany(Reservation::class, 'reservation_statut');
     }
 

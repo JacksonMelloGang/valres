@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Role extends Model
 {
     use HasFactory;
 
-    protected $table = 'service';
+    protected $table = 'role';
 
-    protected $primaryKey = 'id_service';
+    protected $primaryKey = 'id_role';
     public $timestamps = false;
 
     /**
@@ -31,4 +31,8 @@ class Service extends Model
     protected $hidden = [
 
     ];
+
+    public function rangs(){
+        return $this->hasMany(User::class, 'role_id');
+    }
 }

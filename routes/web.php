@@ -2,9 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
-use \App\Http\Controllers\AdminUtilisateurController;
-use \App\Http\Controllers\AdminUtilisateurForm;
 use \App\Http\Controllers\ReservationController;
+
+
+use \App\Http\Controllers\AdminUtilisateurController;
+use \App\Http\Controllers\AdminUtilisateurFormController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,14 +31,12 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 /** Home for all users **/
 Route::get('/dashboard', function () {
-    dd(Auth::user()->isAdmin());
-
     return view('home');
 })->name('dashboard')->middleware('auth');
 
 
 
-/** Reservations **/
+/** Reservations - MIDDLEWARE: AUTH & CAN RESERVE **/
 Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
     Route::get('/reservations', function(){
         return view('reservations');
@@ -72,20 +73,21 @@ Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
 });
 
 
-/** Admin Routes (Manage Users) **/
+/** Admin Routes (Manage Users) - MIDDLEWARE: AUTH & IS ADMIN **/
 Route::group(['middleware' => ['auth', 'admin.auth']], function () {
-    Route::get('/admin/users', [AdminUtilisateur::class, 'show']);
+    Route::get('/admin/users', [AdminUtilisateurController::class, 'show']);
 
-    Route::get('/admin/user/{id}', [AdminUtilisateur::class, 'show_id']);
+    Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_id']);
 
-    Route::get('/admin/user/new', [AdminUtilisateur::class, 'create']);
+    Route::get('/admin/user/new', [AdminUtilisateurController::class, 'create']);
 
-    Route::get('/admin/user/{id}/edit', [AdminUtilisateur::class, 'edit']);
+    Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit']);
+
 
     // path form requests: /admin/user
-    Route::put('/admin/user/new/submit', [AdminUtilisateurFom::class, 'create']);
+    Route::put('/admin/user/new/submit', [AdminUtilisateurFormController::class, 'create']);
 
-    Route::post('/admin/user/edit', [AdminUtilisateurFom::class, 'update']);
+    Route::post('/admin/user/edit', [AdminUtilisateurFormController::class, 'update']);
 
-    Route::delete('/admin/user/delete', [AdminUtilisateurFom::class, 'delete']);
+    Route::delete('/admin/user/delete', [AdminUtilisateurFormController::class, 'delete']);
 });

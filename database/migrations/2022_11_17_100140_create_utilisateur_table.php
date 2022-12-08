@@ -22,12 +22,17 @@ return new class extends Migration
 
             $table->string('username', 50);
             $table->string('password', 70);
-
             $table->string('remember_token', 100)->nullable();
 
             $table->boolean('is_banned')->default(false);
 
+            $table->unsignedBigInteger('id_role');
+
+            // add updated_at & create_at
             $table->timestamps();
+
+            // foreign keys
+            $table->foreign('id_role')->references('id_role')->on('role');
         });
     }
 

@@ -34,6 +34,17 @@ class Reservation extends Model
         return $this->belongsTo(Reservation_statut::class, 'reservation_statut');
     }
 
+    public function isCanceled(){
+        // get reservation_statut where libelle = 'annulé'
+        $r_statut = ReservationStatut::where('libelle', 'Annulé')->first();
+
+        if($this->reservation_statut == $r_statut->reservation_statut_id){
+            return true;
+        }
+
+        return false;
+    }
+
     protected static function newFactory()
     {
         return \Database\Factories\ReservationFactory::new();
