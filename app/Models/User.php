@@ -47,6 +47,10 @@ class User extends Authenticatable
         //'email_verified_at' => 'datetime',
     ];
 
+    public function role(){
+        return $this->belongsTo('App\Models\Role', 'id_role');
+    }
+
     public function isAdministrateur(){
         // get service from administration table based on utilisateur_id
         $role = Role::where('id_role', $this->role_id)->first();

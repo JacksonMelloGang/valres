@@ -2,8 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
-use \App\Http\Controllers\ReservationController;
 
+use \App\Http\Controllers\ReservationController;
+use \App\Http\Controllers\ReservationControllerForm;
 
 use \App\Http\Controllers\AdminUtilisateurController;
 use \App\Http\Controllers\AdminUtilisateurFormController;
@@ -46,30 +47,19 @@ Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
 
     Route::get('/reservation/{id}', [ReservationController::class, 'show_id'])->name('reservation_show');
 
-    Route::get('/reservation/{id}/edit', [ReservationController::class, 'edit'])->name('reservation_edit');
 
-    Route::get('/reservation/{id}/delete', function($id){
-        return view('reservations_delete', ['id' => $id]);
-    })->name('reservation_delete');
 
     Route::get('/reservation/{id}/validate', function($id){
         return view('reservations_validate', ['id' => $id]);
     })->name('reservation_validate');
 
 
-    /** FORM REQUEST /reservation/  **/
+    /** FORM REQUEST /reservation/{create|edit|delete}  **/
+    Route::post('/reservation/create', [ReservationControllerForm::class, 'create_form'])->name('reservation_create');
 
-    Route::post('/reservation/create', [ReservationController::class, 'create_form'])->name('reservation_create');
+    Route::post('/reservation/{id}/edit', [ReservationControllerForm::class, 'edit'])->name('reservation_edit');
 
-    Route::post('/reservation/{id}/edit', function($id){
-        return view('reservations_edit', ['id' => $id]);
-    })->name('reservation_edit_post');
-
-    Route::post('/reservation/{id}/delete', function($id){
-        return view('reservations_delete', ['id' => $id]);
-    })->name('reservation_delete_post');
-
-
+    Route::post('/reservation/{id}/delete', [ReservationControllerForm::class, 'delete'])->name('reservation_delete');
 });
 
 

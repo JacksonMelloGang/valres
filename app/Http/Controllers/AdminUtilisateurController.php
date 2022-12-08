@@ -11,11 +11,11 @@ class AdminUtilisateurController extends Controller
 
     function show(){
         $users = User::all();
-        return view('admin.utilisateurs', ['users' => $users]);
+        return view('admin.utilisateurs', ['utilisateurs' => $users]);
     }
 
     function show_id($id){
         $user = User::find($id);
-        return view('admin.utilisateur', ['user' => $user]);
+        return view('admin.utilisateur', ['utilisateur' => $user]);
     }
 }

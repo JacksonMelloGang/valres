@@ -8,13 +8,12 @@ use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
-    //
-
+    // show views
     public function show(){
         // get all reservations
         $reservations = Reservation::all();
 
-        return view('reservations_show');
+        return view('reservations_show', ['reservations' => $reservations]);
     }
 
     public function show_id($id){
@@ -22,23 +21,5 @@ class ReservationController extends Controller
 
 
         return view('reservation', ['id' => $id, 'reservation' => $reservation]);
-    }
-
-    public function create(Request $request){
-        //return view('reservations_create');
-    }
-
-    public function create_form(Request $request){
-        $allParameters = $request->input();
-
-        dd($allParameters);
-    }
-
-    public function edit($id){
-        return view('reservations_edit', ['id' => $id]);
-    }
-
-    public function delete($id){
-        return view('reservations_delete', ['id' => $id]);
     }
 }
