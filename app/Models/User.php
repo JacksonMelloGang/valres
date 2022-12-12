@@ -25,7 +25,8 @@ class User extends Authenticatable
         'nom',
         'prenom',
         'mail',
-        'role_id'
+        'role_id',
+        'is_banned'
     ];
 
     /**
@@ -45,10 +46,18 @@ class User extends Authenticatable
      */
     protected $casts = [
         //'email_verified_at' => 'datetime',
+        'is_banned' => 'boolean'
     ];
 
     public function role(){
         return $this->belongsTo('App\Models\Role', 'id_role');
+    }
+
+    public function hasRole($role){
+        if($this->role()->where('libelle', $role)->first()){
+            return true;
+        }
+        return false;
     }
 
     public function isAdministrateur(){

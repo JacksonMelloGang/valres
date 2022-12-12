@@ -27,5 +27,9 @@ class RoleSeeder extends Seeder
         \App\Models\Role::factory()->create([
             'libelle' => 'Secretariat',
         ]);
+
+        \App\Models\Role::factory()->create([
+            'libelle' => 'Utilisateur',
+        ]);
     }
 }

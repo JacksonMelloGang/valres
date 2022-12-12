@@ -1,19 +1,19 @@
-@extends('admin.layout')
+@extends('admin.layout.layout')
 @section('content')
 
     <table>
         <!-- Table Headings -->
         <thead>
-            <th>Id</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-            <th>Role</th>
+        <th>Id</th>
+        <th>Nom</th>
+        <th>Prénom</th>
+        <th>Email</th>
+        <th>Role</th>
 
-            <th>Pseudonyme</th>
-            <th>Banni</th>
+        <th>Pseudonyme</th>
+        <th>Banni</th>
 
-            <th>Actions</th>
+        <th>Actions</th>
         </thead>
 
         <!-- Table Body -->
@@ -48,15 +48,16 @@
                 <td class="table-text">
                     <div class="dropdown">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Actions
-                        <span class="caret"></span></button>
+                            <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/edit') }}">Modifier</a></li>
-                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/delete') }}">Supprimer</a></li>
+                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/edit') }}">Modifier</a>
+                            </li>
+                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/delete') }}">Supprimer</a>
+                            </li>
                         </ul>
                     </div>
                 </td>
             </tr>
-
 
         @endforeach
     </table>

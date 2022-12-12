@@ -18,7 +18,7 @@ class ReservationControllerForm extends Controller
         ]);
 
 
-        dd($allParameters);
+        $allParameters = $request->input();
     }
 
     public function edit(Request $request){

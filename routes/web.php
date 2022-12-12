@@ -6,8 +6,14 @@ use \App\Http\Controllers\LoginController;
 use \App\Http\Controllers\ReservationController;
 use \App\Http\Controllers\ReservationControllerForm;
 
+use \App\Http\Controllers\SalleController;
+use \App\Http\Controllers\AdminSalleFormController;
+
 use \App\Http\Controllers\AdminUtilisateurController;
 use \App\Http\Controllers\AdminUtilisateurFormController;
+
+use App\Http\Controllers\AdminRoleController;
+use \App\Http\Controllers\AdminRoleFormController;
 
 
 /*
@@ -30,53 +36,36 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-/** Home for all users **/
-Route::get('/dashboard', function () {
-    return view('home');
-})->name('dashboard')->middleware('auth');
+/** Routes for all users in the condition they are logged in **/
+Route::group(['middleware' => ['auth']], function(){
 
 
-
-/** Reservations - MIDDLEWARE: AUTH & CAN RESERVE **/
-Route::group(['middleware' => ['auth', 'check.canReserve']], function(){
-
-    Route::get('/reservations', [ReservationController::class, 'show'])->name('reservations');
-
-    Route::get('/reservation/create', [ReservationController::class, 'create'])->name('reservation_create');
-
-    Route::get('/reservation/{id}', [ReservationController::class, 'show_id'])->name('reservation_show');
+    // MENU
+    Route::get('/dashboard', function () {
+        return view('home');
+    })->name('dashboard');
 
 
+    /** Reservations **/
+    Route::get('/reservation/dashboard', [ReservationController::class, 'index'])->name('reservation_dashboard');
 
-    Route::get('/reservation/{id}/validate', function($id){
-        return view('reservations_validate', ['id' => $id]);
-    })->name('reservation_validate');
+    /** Consult reservations **/
+    Route::get('/reservations', [ReservationController::class, 'show_reservations'])->name('reservations');
+    Route::get('/reservation/{id}', [ReservationController::class, 'show_reservation'])->name('reservation_show');
 
+    /** Consult salles **/
+    Route::get('/salles', [SalleController::class, 'show_salles'])->name('salles');
+    Route::get('/salle/{id}', [SalleController::class, 'show_salle'])->name('salle_show');
 
-    /** FORM REQUEST /reservation/{create|edit|delete}  **/
-    Route::put('/reservation/create', [ReservationControllerForm::class, 'create_form'])->name('reservation_create');
+    // include admin routes
+    include __DIR__ . '/admin\routes.php';
 
-    Route::post('/reservation/{id}/edit', [ReservationControllerForm::class, 'edit'])->name('reservation_edit');
-
-    Route::post('/reservation/{id}/delete', [ReservationControllerForm::class, 'delete'])->name('reservation_delete');
+    // include reservation routes
+    include __DIR__ . '/reservation\routes.php';
 });
 
 
-/** Admin Routes (Manage Users) - MIDDLEWARE: AUTH & IS ADMIN **/
-Route::group(['middleware' => ['auth', 'admin.auth']], function () {
-    Route::get('/admin/users', [AdminUtilisateurController::class, 'show']);
-
-    Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_id']);
-
-    Route::get('/admin/user/new', [AdminUtilisateurController::class, 'create']);
-
-    Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit']);
 
 
-    // path form requests: /admin/user
-    Route::put('/admin/user/create', [AdminUtilisateurFormController::class, 'create']);
 
-    Route::post('/admin/user/edit', [AdminUtilisateurFormController::class, 'update']);
 
-    Route::delete('/admin/user/delete', [AdminUtilisateurFormController::class, 'delete']);
-});
