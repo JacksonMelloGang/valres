@@ -36,9 +36,13 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'attempt_login'])->name('attempt_login');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
+
+// show reservation routes for today. doesn't require to be logged
+Route::get('/reservations/today', [ReservationController::class, 'today_reservation'])->name('reservation_today');
+
+
 /** Routes for all users in the condition they are logged in **/
 Route::group(['middleware' => ['auth']], function(){
-
 
     // MENU
     Route::get('/dashboard', function () {

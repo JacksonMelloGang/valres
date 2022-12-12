@@ -20,9 +20,12 @@ Route::group(['middleware' => ['admin.auth']], function () {
 
     Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_user'])->name('admin_user_show');
 
+
     Route::get('/admin/user/new', [AdminUtilisateurController::class, 'create_user'])->name('admin_user_create');
 
     Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit_user'])->name('admin_user_edit');
+
+    Route::get('/admin/user/{id}/delete', [AdminUtilisateurController::class, 'delete_user'])->name('admin_user_delete');
 
     // Roles
     Route::get('/admin/roles', [AdminRoleController::class, 'show_roles'])->name('admin_roles');

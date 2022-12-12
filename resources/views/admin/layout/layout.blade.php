@@ -26,7 +26,7 @@
                     <li>
                         <a href="{{route('admin_dashboard')}}" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                            Admin Dashboard
+                            Panel Administrateur
                         </a>
                     </li>
                     <li>
@@ -39,6 +39,15 @@
                         <a href="{{route('admin_users')}}" class="nav-link text-white">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                             Utilisateurs
+                        </a>
+                    </li>
+
+                    <hr>
+
+                    <li>
+                        <a href="{{route('reservation_dashboard')}}" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                            Panel Reservations
                         </a>
                     </li>
                 </ul>
@@ -58,6 +67,7 @@
                 </div>
             </div>--}}
             <div class="col-md-10">
+                @include('components.navbar')
                 <div class="content">
                     @yield('content')
                 </div>

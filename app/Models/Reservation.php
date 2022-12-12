@@ -27,11 +27,11 @@ class Reservation extends Model
     }
 
     public function utilisateur(){
-        return $this->belongsTo(Utilisateur::class, 'utilisateur_id');
+        return $this->belongsTo(User::class, 'utilisateur_id');
     }
 
-    public function reservation_statut(){
-        return $this->belongsTo(Reservation_statut::class, 'reservation_statut');
+    public function statut(){
+        return $this->belongsTo(ReservationStatut::class, 'reservation_statut_id', 'reservation_statut');
     }
 
     public function isCanceled(){

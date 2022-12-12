@@ -1,13 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Valres - {{$title}}</title>
+    <title>Valres - Reservations</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    @include('components.navbar')
-    @yield('content')
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+            <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark col-md-2 sticky-top" style="width: 280px;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    <span class="fs-4">{{config('app.name', 'Laravel')}}</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li class="nav-item">
+                        <a href="{{route('dashboard')}}" class="nav-link active" aria-current="page">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                            Accueil
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('reservation_today')}}" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Les réservations d'aujourd'hui
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin_users')}}" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                            Utilisateurs
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin_salles')}}" class="nav-link text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                            Salles
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+{{--            <div class="col-md-2 sticky-top">
+                <div class="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Valres</h3>
+                    </div>
+                    <ul class="list-unstyled components">
+                        <li>
+                            <a href="{{ route('admin_dashboard') }}">Dashboard</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>--}}
+            <div class="col-md-10">
+                @include('components.navbar')
+                <div class="content">
+                    @yield('content')
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

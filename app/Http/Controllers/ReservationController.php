@@ -30,6 +30,12 @@ class ReservationController extends Controller
         return view('reservation.reservation.reservations', ['reservations' => $reservations]);
     }
 
+    public function today_reservation(){
+        $reservations = Reservation::where('date_reservation', date('Y-m-d'))->get();
+
+        return view('reservation.reservation.reservations', ['reservations' => $reservations]);
+    }
+
     public function show_reservation($id){
         $reservation = Reservation::find($id);
 

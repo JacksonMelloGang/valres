@@ -4,6 +4,8 @@
         <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">Nom et prénom</th>
+            <th scope="col">Salle</th>
             <th scope="col">Date de début</th>
             <th scope="col">Date de fin</th>
             <th scope="col">Actions</th>
@@ -12,15 +14,22 @@
         <tbody>
         @foreach($reservations as $reservation)
             <tr>
-                <th scope="row">{{ $reservation->id }}</th>
-                <td>{{ $reservation->date_debut }}</td>
-                <td>{{ $reservation->date_fin }}</td>
+                <th scope="row">{{ $reservation->reservation_id }}</th>
+                <td>{{ $reservation->utilisateur->nom }}  {{$reservation->utilisateur->prenom}}</td>
+                <td>{{ $reservation->salle->salle_nom }}</td>
+                <td>{{ $reservation->date_reservation }}</td>
+                <td>{{ $reservation->reservation_periode }} Jours</td>
+                <td>{{ $reservation->statut }}</td>
                 <td>
-                    <a href="{{ route('admin_reservations_edit', $reservation->id) }}" class="btn btn-primary">Edit</a>
-                    <a href="{{ route('admin_reservations_delete', $reservation->id) }}" class="btn btn-danger">Delete</a>
+                    @if(Auth::user()->isAdministrateur())
+                        <a href="{{ route('reservation.edit',$reservation->reservation_id) }}" class="btn btn-primary">Modifier</a>
+                        <a href="{{ route('reservation.delete', $reservation->reservation_id) }}" class="btn btn-danger">Supprimer</a>
+                    @else
+                        <a href="{{ route('reservation_show', ['id' => $reservation->reservation_id]) }}" class="btn btn-primary">Consulter</a>
+                    @endif
                 </td>
             </tr>
         @endforeach
         </tbody>
-
+    </table>
 @endsection

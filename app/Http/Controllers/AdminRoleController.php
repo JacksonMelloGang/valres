@@ -35,7 +35,7 @@ class AdminRoleController extends Controller
             return redirect()->route('show_roles')->withErrors(['error' => 'Role not found']);
         }
 
-        return view('admin.role.edit_role', ['role' => $role]);
+        return view('admin.role.role_edit', ['role' => $role]);
     }
 
     function delete_role($id){

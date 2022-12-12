@@ -1,65 +1,95 @@
 @extends('admin.layout.layout')
 @section('content')
 
-    <table>
-        <!-- Table Headings -->
-        <thead>
-        <th>Id</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th>Email</th>
-        <th>Role</th>
+    <div class="container d-flex justify-content-center flex-column">
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
-        <th>Pseudonyme</th>
-        <th>Banni</th>
+        <div class="card">
+            <div class="card-header d-flex align-content-center">
+                <h3 class="card-title flex-grow-1">Liste des utilisateurs</h3>
 
-        <th>Actions</th>
-        </thead>
+                <a class="btn btn-primary align-self-end" href="{{route('admin_user_create')}}">Créer un utilisateur</a>
+                <br>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <!-- Table Headings -->
+                    <thead>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Prénom</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
 
-        <!-- Table Body -->
-        @foreach($utilisateurs as $user)
-            <tr>
-                <td class="table-text">
-                    <div>{{ $user->utilisateur_id }}</div>
-                </td>
-                <td class="table-text">
-                    <div>{{ $user->nom }}</div>
-                </td>
-                <td class="table-text">
-                    <div>{{ $user->prenom }}</div>
-                </td>
-                <td class="table-text">
-                    <div>{{ $user->mail }}</div>
-                </td>
-                <td class="table-text">
-                    <div>{{ $user->role()->first()->libelle }}</div>
-                </td>
+                    <th scope="col">Pseudonyme</th>
+                    <th scope="col">Banni</th>
 
-                <td class="table-text">
-                    <div>{{ $user->username }}</div>
-                </td>
-                <td class="table-text">
-                    @if($user->is_banned == 1)
-                        <div>Oui</div>
-                    @else
-                        <div>Non</div>
-                    @endif
-                </td>
-                <td class="table-text">
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Actions
-                            <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/edit') }}">Modifier</a>
-                            </li>
-                            <li><a href="{{ url('admin/utilisateurs/'.$user->utilisateur_id.'/delete') }}">Supprimer</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
+                    <th scope="col">Actions</th>
+                    </thead>
+                    <!-- Table Body -->
+                    @foreach($utilisateurs as $user)
+                        <tr class="col">
+                            <td class="table-text col">
+                                <div>{{ $user->utilisateur_id }}</div>
+                            </td>
+                            <td class="table-text col">
+                                <div>{{ $user->nom }}</div>
+                            </td>
+                            <td class="table-text col">
+                                <div>{{ $user->prenom }}</div>
+                            </td>
+                            <td class="table-text col">
+                                <div>{{ $user->mail }}</div>
+                            </td>
+                            <td class="table-text col">
+                                <div>{{ $user->role()->first()->libelle }}</div>
+                            </td>
 
-        @endforeach
-    </table>
+                            <td class="table-text col">
+                                <div>{{ $user->username }}</div>
+                            </td>
+                            <td class="table-text col">
+                                @if($user->is_banned == 1)
+                                    <div>Oui</div>
+                                @else
+                                    <div>Non</div>
+                                @endif
+                            </td>
+                            <td class="table-text">
+                                <div class="dropdown">
+                                    <button class="btn btn-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" id="dropdownMenuButton1" aria-expanded="false">
+                                        Actions<span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin_user_edit', ['id' => $user->utilisateur_id])}}">Modifier</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="{{ route('admin_user_delete', ['id' => $user->utilisateur_id])}}">Supprimer</a>
+                                        </li>
+                                        @if($user->is_banned == 1)
+                                            <hr class="dropdown-divider">
+                                            <li>
+                                                <a class="dropdown-item bg-danger" href="{{ route('admin_user_delete', ['id' => $user->utilisateur_id])}}">Débannir</a>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+
+                    @endforeach
+                </table>
+            </div>
+        </div>
+    </div>
 
 @endsection

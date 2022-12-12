@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Promise\all;
 
 class AdminUtilisateurController extends Controller
 {
@@ -40,18 +41,24 @@ class AdminUtilisateurController extends Controller
     function show_users(){
         $users = User::all();
 
-        return view('admin.utilisateurs', ['utilisateurs' => $users]);
+        return view('admin.user.utilisateurs', ['utilisateurs' => $users]);
     }
 
     function show_user($id){
         $user = User::find($id);
-        $role = $user->roles()->first();
+        if($user == null){
+            return redirect()->route('admin_users')->withErrors(['Utilisateur introuvable']);
+        }
 
-        return view('admin.utilisateur', ['utilisateur' => $user, 'role' => $role]);
+        $role = $user->role()->first();
+
+        return view('admin.user.utilisateur', ['utilisateur' => $user, 'role' => $role]);
     }
 
     function create_user(){
-        return view('admin.utilisateur_create');
+        $roles = Role::all();
+
+        return view('admin.user.utilisateur_create');
     }
 
     function edit_user($id){
@@ -59,7 +66,11 @@ class AdminUtilisateurController extends Controller
         $roles = Role::all();
         $role = $user->roles()->first();
 
-        return view('admin.utilisateur_edit', ['utilisateur' => $user, 'roles' => $roles, 'user-role' => $role]);
+        return view('admin.user.utilisateur_edit', ['utilisateur' => $user, 'roles' => $roles, 'user-role' => $role]);
+    }
+
+    function delete_user($id){
+
     }
 
 }
