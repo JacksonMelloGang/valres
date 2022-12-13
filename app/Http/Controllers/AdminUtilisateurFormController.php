@@ -40,6 +40,15 @@ class AdminUtilisateurFormController extends Controller
     }
 
     function update_user(Request $request){
+        $request->validate([
+            'id' => 'required|int',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'pseudo' => 'required',
+            'mail' => 'required|email',
+            'role' => 'required',
+            'isbanned' => 'required',
+        ]);
 
     }
 

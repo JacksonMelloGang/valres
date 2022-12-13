@@ -11,7 +11,7 @@ class Categorie_structure extends Model
 
     protected $table = 'categorie_structure';
 
-    protected $primaryKey = 'categorie_id';
+    protected $primaryKey = 'cat_id';
     public $timestamps  = false;
 
     protected $fillable = [
@@ -19,7 +19,7 @@ class Categorie_structure extends Model
     ];
 
     public function structures(){
-        return $this->hasMany(Structure::class, 'categorie_id');
+        return $this->hasMany(Structure::class, 'cat_id');
     }
 
     protected static function newFactory()

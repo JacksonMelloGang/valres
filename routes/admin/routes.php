@@ -29,13 +29,7 @@ Route::group(['middleware' => ['admin.auth']], function () {
     // Roles
     Route::get('/admin/roles', [AdminRoleController::class, 'show_roles'])->name('admin_roles');
 
-    Route::get('/admin/role/new', [AdminRoleController::class, 'create_role'])->name('admin_role_create');
-
     Route::get('/admin/role/{id}', [AdminRoleController::class, 'show_role_id'])->name('admin_role_show');
-
-    Route::get('/admin/role/{id}/edit', [AdminRoleController::class, 'edit_role'])->name('admin_role_edit');
-
-    Route::get('/admin/role/{id}/delete', [AdminRoleController::class, 'delete_role'])->name('admin_role_delete');
 
     // Salles
     Route::get('/admin/salles', [SalleController::class, 'show_salles_admin'])->name('admin_salles');

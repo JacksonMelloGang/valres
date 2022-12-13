@@ -30,7 +30,7 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'utilisateur_id');
     }
 
-    public function statut(){
+    public function reservationstatut(){
         return $this->belongsTo(ReservationStatut::class, 'reservation_statut_id', 'reservation_statut');
     }
 

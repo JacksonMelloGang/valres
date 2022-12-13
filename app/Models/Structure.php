@@ -18,4 +18,8 @@ class Structure extends Model
         'structure_nom',
         'structure_adresse',
     ];
+
+    public function categorie(){
+        return $this->belongsTo(Categorie_structure::class, 'cat_id');
+    }
 }

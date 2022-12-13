@@ -11,7 +11,7 @@ class Categorie_salle extends Model
 
     protected $table = 'categorie_salle';
 
-    protected $primaryKey = 'categorie_id';
+    protected $primaryKey = 'cat_id';
     public $timestamps = false;
 
     protected $fillable = [
@@ -19,7 +19,7 @@ class Categorie_salle extends Model
     ];
 
     public function salles(){
-        return $this->hasMany(Salle::class, 'categorie_id');
+        return $this->hasMany(Salle::class, 'cat_id');
     }
 
     protected static function newFactory()

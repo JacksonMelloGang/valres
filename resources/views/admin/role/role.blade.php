@@ -1,27 +1,40 @@
 @extends('admin.layout.layout')
 @section('content')
-    // table with bootstrap, with a button to edit the role or delete it below the table
-    <table class="table">
+
+    <h3>Rôle {{$role->libelle}}</h3>
+    <table class="table table-striped">
         <thead>
         <tr>
             <th scope="col">#</th>
             <th scope="col">Libelle</th>
-            <th scope="col">Description</th>
-            <th scope="col">Actions</th>
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $role)
             <tr>
-                <th scope="row">{{ $role->id }}</th>
+                <td>{{ $role->id_role }}</td>
                 <td>{{ $role->libelle }}</td>
-                <td>{{ $role->description }}</td>
-                <td>
-                    <a href="{{ route('admin_roles_edit', $role->id) }}" class="btn btn-primary">Edit</a>
-                    <a href="{{ route('admin_roles_delete', $role->id) }}" class="btn btn-danger">Delete</a>
-                </td>
             </tr>
-        @endforeach
         </tbody>
+    </table>
+
+    <h3>Utilisateurs possédant le rôle</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Prénom</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach($users as $user)
+                <tr>
+                    <td>{{ $user->utilisateur_id }}</td>
+                    <td>{{ $user->nom }}</td>
+                    <td>{{ $user->prenom }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
 
 @endsection

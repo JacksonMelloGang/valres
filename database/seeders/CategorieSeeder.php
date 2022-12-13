@@ -15,8 +15,38 @@ class CategorieSeeder extends Seeder
     public function run()
     {
         //
-        \App\Models\Categorie_salle::factory(3)->create();
-        \App\Models\Categorie_structure::factory(3)->create();
+        \App\Models\Categorie_salle::factory()->create([
+            'libelle' => 'Réunion',
+        ]);
+        \App\Models\Categorie_salle::factory()->create([
+            'libelle' => 'Avec équipements',
+        ]);
+        \App\Models\Categorie_salle::factory()->create([
+            'libelle' => 'Amphi',
+        ]);
 
+
+
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Ligue',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Club sportif',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Comité départemental',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Association',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Lycée',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Collège',
+        ]);
+        \App\Models\Categorie_structure::factory()->create([
+            'libelle' => 'Autres',
+        ]);
     }
 }

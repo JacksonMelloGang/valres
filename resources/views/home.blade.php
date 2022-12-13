@@ -12,7 +12,7 @@
                         </div>
                     @endif
 
-                    @if(Auth::user()->role->libelle == 'Administrateur' || Auth::user()->role->libelle == 'Responsable' || Auth::user()->role->libelle == 'Secretariat')
+                    @if(Auth::user()->role->libelle == 'Administrateur')
                         <div class="card">
                             <div class="card-body">
                                 <h1>Administration</h1>

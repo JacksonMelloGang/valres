@@ -65,11 +65,28 @@ class AdminUtilisateurController extends Controller
     }
 
     function edit_user($id){
-        $user = User::findOrFail($id);
-        $roles = Role::all();
-        $role = $user->roles()->first();
+        $user = User::find($id);
 
-        return view('admin.user.utilisateur_edit', ['utilisateur' => $user, 'roles' => $roles, 'user-role' => $role]);
+        if($user == null){
+            return redirect()->route('admin_users')->withErrors(['Utilisateur introuvable']);
+        }
+
+        $roles = Role::all();
+        $structures = Structure::all();
+
+        // get role of user
+        $role = $user->role()->first();
+
+        // get client based on user id
+        $client = $user->client()->first();
+        if($client != null){
+            // get structure
+            $structure = $client->structure()->first();
+        } else {
+            $structure = null;
+        }
+
+        return view('admin.user.utilisateur_edit', ['utilisateur' => $user, 'roles' => $roles, 'userrole' => $role, 'structure' => $structure, 'client' => $client, 'structures' => $structures]);
     }
 
     function delete_user($id){

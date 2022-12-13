@@ -25,6 +25,7 @@ class User extends Authenticatable
         'nom',
         'prenom',
         'mail',
+        'username',
         'role_id',
         'is_banned'
     ];
@@ -51,6 +52,10 @@ class User extends Authenticatable
 
     public function role(){
         return $this->belongsTo('App\Models\Role', 'id_role');
+    }
+
+    public function client(){
+        return $this->hasOne('App\Models\Client', 'utilisateur_id');
     }
 
     public function hasRole($role){
