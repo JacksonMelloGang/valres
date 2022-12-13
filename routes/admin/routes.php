@@ -18,10 +18,9 @@ Route::group(['middleware' => ['admin.auth']], function () {
     // Users
     Route::get('/admin/users', [AdminUtilisateurController::class, 'show_users'])->name('admin_users');
 
+    Route::get('/admin/user/create', [AdminUtilisateurController::class, 'create_user'])->name('admin_user_create');
+
     Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_user'])->name('admin_user_show');
-
-
-    Route::get('/admin/user/new', [AdminUtilisateurController::class, 'create_user'])->name('admin_user_create');
 
     Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit_user'])->name('admin_user_edit');
 
@@ -30,9 +29,9 @@ Route::group(['middleware' => ['admin.auth']], function () {
     // Roles
     Route::get('/admin/roles', [AdminRoleController::class, 'show_roles'])->name('admin_roles');
 
-    Route::get('/admin/role/{id}', [AdminRoleController::class, 'show_role_id'])->name('admin_role_show');
-
     Route::get('/admin/role/new', [AdminRoleController::class, 'create_role'])->name('admin_role_create');
+
+    Route::get('/admin/role/{id}', [AdminRoleController::class, 'show_role_id'])->name('admin_role_show');
 
     Route::get('/admin/role/{id}/edit', [AdminRoleController::class, 'edit_role'])->name('admin_role_edit');
 

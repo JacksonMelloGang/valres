@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Structure;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
@@ -57,8 +58,10 @@ class AdminUtilisateurController extends Controller
 
     function create_user(){
         $roles = Role::all();
+        $structures = Structure::all();
 
-        return view('admin.user.utilisateur_create');
+
+        return view('admin.user.utilisateur_create', ['roles' => $roles, 'structures' => $structures]);
     }
 
     function edit_user($id){

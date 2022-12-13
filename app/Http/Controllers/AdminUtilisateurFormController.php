@@ -9,7 +9,7 @@ class AdminUtilisateurFormController extends Controller
 {
     //
 
-    function create(Request $request){
+    function create_user(Request $request){
 
         if($request->method() != 'POST'){
             // return with http error, invalid http method
@@ -39,11 +39,23 @@ class AdminUtilisateurFormController extends Controller
         return redirect('/admin/utilisateur/{id}')->with(['success' => 'Utilisateur créé avec succès']);
     }
 
-    function edit(Request $request){
+    function update_user(Request $request){
 
     }
 
-    function delete(Request $request){
+    function delete_user(Request $request){
+        $request->validate([
+            'id' => 'required'
+        ]);
 
+        $user = \App\Models\User::find($request->id);
+
+        if($user == null){
+            return response('Utilisateur introuvable', 404);
+        }
+
+        $user->delete();
+
+        return view('admin.user.utilisateurs', ['success' => 'Utilisateur supprimé avec succès']);
     }
 }

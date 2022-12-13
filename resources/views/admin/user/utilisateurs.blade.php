@@ -11,16 +11,26 @@
                 </ul>
             </div>
         @endif
-
-        <div class="card">
-            <div class="card-header d-flex align-content-center">
-                <h3 class="card-title flex-grow-1">Liste des utilisateurs</h3>
-
-                <a class="btn btn-primary align-self-end" href="{{route('admin_user_create')}}">Créer un utilisateur</a>
-                <br>
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
             </div>
-            <div class="card-body">
-                <table class="table">
+        @endif
+        <div class="row">
+            <div class="col-12">
+                <h1 class="text-center">Utilisateurs</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                    <div class="d-flex align-content-center mb-1">
+                        <h3 class="flex-grow-1">Liste des utilisateurs</h3>
+                        <a class="btn btn-primary align-self-end" href="{{route('admin_user_create')}}">Créer un utilisateur</a>
+                        <br>
+                    </div>
+
+                <table class="table table-striped">
                     <!-- Table Headings -->
                     <thead>
                     <th scope="col">Id</th>
@@ -70,6 +80,9 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         <li>
+                                            <a class="dropdown-item" href="{{ route('admin_user_show', ['id' => $user->utilisateur_id])}}">Consulter</a>
+                                        </li>
+                                        <li>
                                             <a class="dropdown-item" href="{{ route('admin_user_edit', ['id' => $user->utilisateur_id])}}">Modifier</a>
                                         </li>
                                         <li>
@@ -88,8 +101,8 @@
 
                     @endforeach
                 </table>
+
             </div>
         </div>
     </div>
-
 @endsection
