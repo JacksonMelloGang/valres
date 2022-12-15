@@ -17,7 +17,7 @@
                             <div class="card-body">
                                 <h1>Administration</h1>
                                 <div class="card-body d-flex justify-content-around">
-                                    <a href="{{ route('admin_dashboard') }}" class="btn btn-primary">Accéder</a>
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn-primary">Accéder</a>
                                 </div>
                             </div>
                         </div>
@@ -27,7 +27,7 @@
                         <div class="card-body">
                             <h1>Reservations</h1>
                             <div class="card-body d-flex justify-content-around">
-                                <a href="{{ route('reservation_dashboard') }}" class="btn btn-primary">Accéder</a>
+                                <a href="{{ route('reservation.dashboard') }}" class="btn btn-primary">Accéder</a>
                             </div>
                         </div>
                     </div>

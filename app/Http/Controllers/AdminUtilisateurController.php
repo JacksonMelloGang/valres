@@ -48,7 +48,7 @@ class AdminUtilisateurController extends Controller
     function show_user($id){
         $user = User::find($id);
         if($user == null){
-            return redirect()->route('admin_users')->withErrors(['Utilisateur introuvable']);
+            return redirect()->route('admin.users')->withErrors(['Utilisateur introuvable']);
         }
 
         $role = $user->role()->first();
@@ -61,14 +61,14 @@ class AdminUtilisateurController extends Controller
         $structures = Structure::all();
 
 
-        return view('admin.user.utilisateur_create', ['roles' => $roles, 'structures' => $structures]);
+        return view('admin.user.create', ['roles' => $roles, 'structures' => $structures]);
     }
 
     function edit_user($id){
         $user = User::find($id);
 
         if($user == null){
-            return redirect()->route('admin_users')->withErrors(['Utilisateur introuvable']);
+            return redirect()->route('admin.users')->withErrors(['Utilisateur introuvable']);
         }
 
         $roles = Role::all();
@@ -86,11 +86,9 @@ class AdminUtilisateurController extends Controller
             $structure = null;
         }
 
-        return view('admin.user.utilisateur_edit', ['utilisateur' => $user, 'roles' => $roles, 'userrole' => $role, 'structure' => $structure, 'client' => $client, 'structures' => $structures]);
+        return view('admin.user.edit', ['utilisateur' => $user, 'roles' => $roles, 'userrole' => $role, 'structure' => $structure, 'client' => $client, 'structures' => $structures]);
     }
 
-    function delete_user($id){
 
-    }
 
 }

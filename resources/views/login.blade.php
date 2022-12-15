@@ -53,6 +53,12 @@
                                     {{ __('Login') }}
                                 </button>
 
+                                @if (Route::has('reservation.today'))
+                                    <a class="btn btn-link" href="{{ route('reservation.today') }}">
+                                        {{ __('Voir les réservations d\'aujourd\'hui') }}
+                                    </a>
+                                @endif
+
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}

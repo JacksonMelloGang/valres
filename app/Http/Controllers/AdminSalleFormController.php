@@ -10,23 +10,25 @@ class AdminSalleFormController extends Controller
 
     function create_salle(Request $request){
         if($request->method() !== 'POST'){
-            return redirect()->route('show_salles')->withErrors(['error' => 'Invalid request']);
+            return redirect()->route('show.salles')->withErrors(['error' => 'Invalid request']);
         }
 
         $request->validate([
             'salle_nom' => 'required',
+            'categorie_id' => 'required|between:1,3',
         ]);
 
         $salle = new \App\Models\Salle();
         $salle->salle_nom = $request->input('salle_nom');
+        $salle->cat_id = $request->input('categorie_id');
         $salle->save();
 
-        return redirect()->route('show_salles')->with('success', 'Salle created');
+        return redirect()->route('salles.show')->with('success', 'Salle created');
     }
 
-    function edit_salle(Request $request){
+    function update_salle(Request $request){
         if($request->method() != "POST"){
-            return redirect()->route('show_salles')->withErrors(['error' => 'Invalid request method']);
+            return redirect()->route('show.salles')->withErrors(['error' => 'Invalid request method']);
         }
 
         $request->validate([
@@ -37,19 +39,20 @@ class AdminSalleFormController extends Controller
         $salle = \App\Models\Salle::find($request->salle_id);
 
         if($salle == null){
-            return redirect()->route('show_salles')->withErrors(['error' => 'Salle not found']);
+            return redirect()->route('salles.show')->withErrors(['error' => 'Salle not found']);
         }
 
         $salle->salle_nom = $request->salle_nom;
         $salle->save();
 
-        return redirect()->route('show_salle_id', ['id' => $salle->salle_id])->with('success', 'Salle updated');
+        return redirect()->route('salle.show', ['id' => $salle->salle_id])->with('success', 'Salle updated');
     }
+
 
     function delete_salle(Request $request){
 
         if($request->method() != "POST"){
-            return redirect()->route('show_salles')->withErrors(['error' => 'Invalid request method']);
+            return redirect()->route('salles.show')->withErrors(['error' => 'Invalid request method']);
         }
 
         $request->validate([
@@ -58,13 +61,22 @@ class AdminSalleFormController extends Controller
 
         $salle = \App\Models\Salle::find($request->salle_id);
 
+
         if($salle == null){
-            return redirect()->route('show_salles')->withErrors(['error' => 'Salle not found']);
+            return redirect()->route('salles.show')->withErrors(['error' => 'Salle not found']);
+        }
+
+        // check if linked to any reservation
+        $reservations = \App\Models\Reservation::where('salle_id', $salle->salle_id)->get();
+
+        // if there is any reservation linked to this salle, we can't delete it
+        if(count($reservations) > 0){
+            return redirect()->route('salles.show')->withErrors(['error' => 'Salle is linked to a reservation']);
         }
 
         $salle->delete();
 
-        return redirect()->route('show_salles')->with('success', 'Salle deleted');
+        return redirect()->route('salles.show')->with('success', 'Salle deleted');
 
     }
 }

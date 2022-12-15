@@ -20,13 +20,13 @@ return new class extends Migration
             $table->string('prenom', 50);
             $table->string('mail', 100);
 
-            $table->string('username', 50);
+            $table->string('username', 50)->unique();
             $table->string('password', 70);
             $table->string('remember_token', 100)->nullable();
 
             $table->boolean('is_banned')->default(false);
 
-            $table->unsignedBigInteger('id_role');
+            $table->unsignedBigInteger('id_role')->default(4);
 
             // add updated_at & create_at
             $table->timestamps();

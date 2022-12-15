@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StructureController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
 
@@ -15,7 +16,8 @@ use \App\Http\Controllers\AdminUtilisateurFormController;
 use App\Http\Controllers\AdminRoleController;
 use \App\Http\Controllers\AdminRoleFormController;
 
-
+use App\Http\Controllers\UtilisateurController;
+use App\Http\Controllers\UtilisateurControllerForm;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,7 +40,7 @@ Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
 // show reservation routes for today. doesn't require to be logged
-Route::get('/reservations/today', [ReservationController::class, 'today_reservation'])->name('reservation_today');
+Route::get('/reservations/today', [ReservationController::class, 'today_reservation'])->name('reservation.today');
 
 
 /** Routes for all users in the condition they are logged in **/
@@ -51,22 +53,30 @@ Route::group(['middleware' => ['auth']], function(){
 
 
     /** Reservations **/
-    Route::get('/reservation/dashboard', [ReservationController::class, 'index'])->name('reservation_dashboard');
+    Route::get('/reservation/dashboard', [ReservationController::class, 'index'])->name('reservation.dashboard');
 
     /** Consult reservations **/
-    Route::get('/reservations', [ReservationController::class, 'show_reservations'])->name('reservations');
-    Route::get('/reservation/{id}', [ReservationController::class, 'show_reservation'])->name('reservation_show');
+    Route::get('/reservations', [ReservationController::class, 'show_reservations'])->name('reservations.show');
+    Route::get('/reservation/{id}', [ReservationController::class, 'show_reservation'])->name('reservation.show');
 
     /** Consult salles **/
-    Route::get('/salles', [SalleController::class, 'show_salles'])->name('salles');
-    Route::get('/salle/{id}', [SalleController::class, 'show_salle'])->name('salle_show');
+    Route::get('/salles', [SalleController::class, 'show_salles'])->name('salles.show');
+    Route::get('/salle/{id}', [SalleController::class, 'show_salle'])->name('salle.show');
 
-    // include admin routes
-    include __DIR__ . '/admin\routes.php';
+    /**  Consult structures **/
+    Route::get('/structures', [StructureController::class, 'show_structures'])->name('structures.show');
+    Route::get('/structure/{id}', [StructureController::class, 'show_structure'])->name('structure.show');
 
-    // include reservation routes
-    include __DIR__ . '/reservation\routes.php';
+    // user
+    Route::get('/user/profile', [UtilisateurController::class, 'show_profile'])->name('user.profile');
+
 });
+
+// include admin routes
+include __DIR__ . '/admin\routes.php';
+
+// include reservation routes (require canReserve permission)
+include __DIR__ . '/reservation\routes.php';
 
 
 

@@ -86,12 +86,6 @@
                                             <li>
                                                 <a class="dropdown-item" href="{{ route('admin.user.edit', ['id' => $user->utilisateur_id])}}">Modifier</a>
                                             </li>
-                                            <li>
-                                                <form action="{{url('/admin/user/delete')}}" method="POST">
-                                                    @csrf
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $user->utilisateur_id }}">Supprimer</button>
-                                                </form>
-                                            </li>
                                             @if($user->is_banned == 1)
                                                 <hr class="dropdown-divider">
                                                 <li>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AdminUtilisateurFormController extends Controller
@@ -16,27 +18,49 @@ class AdminUtilisateurFormController extends Controller
             return response('Invalid HTTP method', 405);
         }
 
+        if(!Auth::user()->hasRole('Administrateur')){
+            // not allowed. return with http error
+            return response('Not allowed', 403);
+        }
+
         $request->validate([
             'nom' => 'required',
             'prenom' => 'required',
-            'email' => 'required|email',
+            'mail' => 'required|email',
+            'username' => 'required',
             'password' => 'required',
             'role' => 'required',
+
+            'structure' => 'required_if:role,==,Utilisateur'
         ]);
+
+        // check if username is not already taken
+        if(User::where('username', $request->username)->first() != null){
+            return redirect()->back()->withErrors(['Nom d\'utilisateur déjà utilisé']);
+        }
 
         // create new user that we're going to save in db later
         $user = new \App\Models\User();
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
-        $user->email = $request->email;
+        $user->mail = $request->mail;
+        $user->username = $request->username;
         $user->password = Hash::make($request->password);
-        $user->role = $request->role;
+        $user->id_role = $request->role;
         $user->save();
 
         // get id of the saved user
-        $id = $user->id;
+        $id = $user->utilisateur_id;
 
-        return redirect('/admin/utilisateur/{id}')->with(['success' => 'Utilisateur créé avec succès']);
+        // if role is Utilisateur, we need to create a new client
+        if($request->id_role == 4){
+            $client = new \App\Models\Client();
+            $client->id_utilisateur = $id;
+            $client->id_structure = $request->structure;
+            $client->save();
+        }
+
+        return redirect("/admin/user/{$id}")->with(['success' => 'Utilisateur créé avec succès']);
     }
 
     function update_user(Request $request){
@@ -44,27 +68,139 @@ class AdminUtilisateurFormController extends Controller
             'id' => 'required|int',
             'nom' => 'required',
             'prenom' => 'required',
-            'pseudo' => 'required',
+            'username' => 'required',
             'mail' => 'required|email',
             'role' => 'required',
             'isbanned' => 'required',
         ]);
 
+        $user = User::find($request->id);
+
+        if($user == null){
+            return redirect()->back()->withErrors(['Utilisateur introuvable']);
+        }
+
+        $user->nom = $request->nom;
+        $user->prenom = $request->prenom;
+        $user->mail = $request->mail;
+        $user->username = $request->username;
+        $user->id_role = $request->role;
+        $user->is_banned = $request->isbanned;
+
+        $user->save();
+        return redirect()->back()->with(['success' => 'Utilisateur mis à jour avec succès']);
     }
 
     function delete_user(Request $request){
         $request->validate([
-            'id' => 'required'
+            'id' => 'required|int'
         ]);
 
-        $user = \App\Models\User::find($request->id);
+        $id = $request->id;
 
+        $user = User::find($id);
+        $hasFutureReservation = false;
+
+        // can't delete user if it doesn't exist
         if($user == null){
-            return response('Utilisateur introuvable', 404);
+            return redirect()->route('admin.users')->withErrors(['Utilisateur introuvable']);
         }
 
-        $user->delete();
+        // can't delete role
+        if($user->hasRole('Administrateur')){
+            return redirect()->route('admin.users')->withErrors(['Impossible de supprimer un administrateur']);
+        }
 
-        return view('admin.user.utilisateurs', ['success' => 'Utilisateur supprimé avec succès']);
+        // check if user has any reservations
+        if($user->reservations()->get() != null){
+            // check if reservation_date is past now
+            foreach($user->reservations()->get() as $reservation){
+                if($reservation->reservation_date > now()){
+                    $hasFutureReservation = true;
+                }
+            }
+        }
+
+        // if user has future reservation, redirect to user page
+        if($hasFutureReservation){
+            return redirect()->route('admin.users')->withErrors(['Impossible de supprimer un utilisateur ayant des réservations futures']);
+        } else {
+            // delete reservations
+            foreach($user->reservations()->get() as $reservation){
+                $reservation->delete();
+            }
+
+            // if user role is Utilisateur, means it has a structure, then delete it
+            if($user->role()->first()->name == 'Utilisateur'){
+                $user->client()->delete();
+            }
+
+            // delete user
+            $user->delete();
+        }
+
+
+
+
+        return redirect()->route('admin.users')->with('success', 'Utilisateur supprimé');
     }
+
+
+    function ban_user(Request $request){
+        $request->validate([
+            'id' => 'required|int'
+        ]);
+
+        $id = $request->id;
+
+        $user = User::find($id);
+
+        // can't ban user if it doesn't exist
+        if($user == null){
+            return redirect()->route('admin.users')->withErrors(['Utilisateur introuvable']);
+        }
+
+        // can't ban Administrateur
+        if($user->hasRole('Administrateur')){
+            return redirect()->route('admin.users')->withErrors(['Impossible de bannir un administrateur']);
+        }
+
+        // can't ban user if it's already banned
+        if($user->is_banned){
+            return redirect()->route('admin.users')->withErrors(['Utilisateur déjà banni']);
+        }
+
+        // ban user
+        $user->is_banned = true;
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'Utilisateur banni');
+    }
+
+    function unban_user(Request $request){
+
+        $request->validate([
+            'id' => 'required|int'
+        ]);
+
+        $id = $request->id;
+
+        $user = User::find($id);
+
+        // can't unban user if it doesn't exist
+        if($user == null){
+            return redirect()->route('admin.users')->withErrors(['Utilisateur introuvable']);
+        }
+
+        // can't unban an user not banned
+        if(!$user->is_banned){
+            return redirect()->route('admin.users')->withErrors(['l\'Utilisateur n\'est pas banni']);
+        }
+
+        $user->is_banned = false;
+        $user->save();
+
+        return redirect()->route('admin.users')->with('success', 'Utilisateur débanni');
+    }
+
 }

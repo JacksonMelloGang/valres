@@ -13,6 +13,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $user = auth()->user();
+        if(!$user->hasRole('Administrateur')) {
+            return redirect()->route('reservation.dashboard');
+        }
+
         return view('home');
     }
 }

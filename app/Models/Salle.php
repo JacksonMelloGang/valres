@@ -18,7 +18,11 @@ class Salle extends Model
         'salle_nom',
     ];
 
-    public function structure(){
-        return $this->belongsTo(Structure::class, 'structure_id');
+    public function reservations(){
+        return $this->hasMany(Reservation::class, 'salle_id', 'salle_id');
+    }
+
+        public function categorie(){
+        return $this->belongsTo(Categorie_salle::class, 'cat_id');
     }
 }

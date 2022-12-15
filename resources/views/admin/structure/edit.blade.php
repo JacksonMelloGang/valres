@@ -1,7 +1,23 @@
 @extends('admin.layout.layout')
 @section('content')
 
-    <div class="row">
+    <div class="row mt-2">
+
+        @if($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
 
         <div class="col-md-6">
             <div class="card card-user">
@@ -32,25 +48,24 @@
                             <td>Role</td>
                             <td>{{$userrole->libelle}}</td>
                         </tr>
-
-                        <tr>
-                            <td>Nom de la structure</td>
-                            @if($structure == null)
-                                <td>Non renseigné</td>
-                            @else
-                                <td>{{$structure->stucture_nom}}</td>
-                            @endif
-                        </tr>
-                        <tr>
-                            <td>Adresse de la structure</td>
-                            @if($structure == null)
-                                <td>Non renseigné</td>
-                            @else
-                                <td>{{$structure->structure_adresse}}</td>
-                            @endif
-                        </tr>
-
-
+                        @if($userrole->libelle == 'Utilisateur')
+                            <tr>
+                                <td>Nom de la structure</td>
+                                @if($structure == null)
+                                    <td>Non renseigné</td>
+                                @else
+                                    <td>{{$structure->stucture_nom}}</td>
+                                @endif
+                            </tr>
+                            <tr>
+                                <td>Adresse de la structure</td>
+                                @if($structure == null)
+                                    <td>Non renseigné</td>
+                                @else
+                                    <td>{{$structure->structure_adresse}}</td>
+                                @endif
+                            </tr>
+                        @endif
                         <tr>
                             <td>Créé le</td>
                             <td>{{$utilisateur->created_at}}</td>
@@ -76,7 +91,7 @@
         </div>
 
         <div class="col-md-6">
-            <div class="card mt-2">
+            <div class="card">
                 <div class="card-header">
                     <h5 class="title">{{ __('Modifier l\'utilisateur') }}</h5>
                 </div>
@@ -95,7 +110,7 @@
                                     <label>{{__('Role')}}</label>
                                     <select class="form-control" name="role">
                                         @foreach($roles as $role)
-                                            <option value="{{$role->role_id}}">{{$role->libelle}}</option>
+                                            <option value="{{$role->id_role}}">{{$role->libelle}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -105,7 +120,7 @@
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
                                     <label>{{__('Pseudonyme')}}</label>
-                                    <input type="text" class="form-control" name="pseudo" value="{{ $utilisateur->username }}">
+                                    <input type="text" class="form-control" name="username" value="{{ $utilisateur->username }}">
 
                                     <label>{{__('Banni ?')}}</label>
                                     <select class="form-control" name="isbanned">

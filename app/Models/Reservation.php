@@ -14,10 +14,10 @@ class Reservation extends Model
     protected $primaryKey = 'reservation_id';
 
     protected $fillable = [
-        'date_debut',
-        'reservation_periode',
         'salle_id',
         'utilisateur_id',
+        'date_debut',
+        'reservation_periode',
         'reservation_statut' // provisoire, confirmé, annulé
     ];
 
@@ -30,8 +30,8 @@ class Reservation extends Model
         return $this->belongsTo(User::class, 'utilisateur_id');
     }
 
-    public function reservationstatut(){
-        return $this->belongsTo(ReservationStatut::class, 'reservation_statut_id', 'reservation_statut');
+    public function reservation_statut(){
+        return $this->belongsTo(ReservationStatut::class, 'reservation_statut', 'reservation_statut_id');
     }
 
     public function isCanceled(){

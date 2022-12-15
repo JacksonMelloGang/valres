@@ -30,7 +30,7 @@ class EnsureUserIsAdmin
         }
 
         // get role based on id_role of the user and check it's libelle is Administrateur
-        if (!$tableRole->libelle == 'Administrateur') {
+        if ($tableRole->libelle != 'Administrateur') {
             return redirect()->route('dashboard')->with('error', 'Vous n\'avez pas les droits pour accéder à cette page');
         }
 

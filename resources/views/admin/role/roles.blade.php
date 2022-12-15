@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $role->id_role }}</td>
                     <td>{{ $role->libelle }}</td>
-                    <td><a href="{{route('admin_role_show', ['id' => $role->id_role])}}" class="btn btn-warning">Consulter</a></td>
+                    <td><a href="{{route('admin.role.show', ['id' => $role->id_role])}}" class="btn btn-warning">Consulter</a></td>
                 </tr>
             @endforeach
             </tbody>

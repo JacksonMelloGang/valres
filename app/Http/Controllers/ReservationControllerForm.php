@@ -17,7 +17,7 @@ class ReservationControllerForm extends Controller
             'utilisateur_id' => 'required|integer',
             'salle_id' => 'required|integer',
             'date_reservation' => 'required|date',
-            'reservation_periode' => 'require|integer',
+            'reservation_periode' => 'required|integer',
             'reservation_commentaire' => 'nullable|string',
             'reservation_statut' => 'required|integer',
         ]);
@@ -30,7 +30,7 @@ class ReservationControllerForm extends Controller
         $reservation->reservation_statut = $request->input('reservation_statut');
         $reservation->save();
 
-        return redirect()->route('reservation_show', ['id' => $reservation->id]);
+        return redirect()->route('reservation.show', ['id' => $reservation->id]);
     }
 
     public function edit(Request $request){
@@ -40,23 +40,29 @@ class ReservationControllerForm extends Controller
         }
 
         $request->validate([
+            'reservation_id' => 'required|integer',
             'utilisateur_id' => 'required|integer',
             'salle_id' => 'required|integer',
-            'date_reservation' => 'required|date',
-            'reservation_periode' => 'require|integer',
+            'date_reservation' => 'required',
+            'reservation_periode' => 'required|integer',
             'reservation_commentaire' => 'nullable|string',
             'reservation_statut' => 'required|integer',
         ]);
 
         $reservation = \App\Models\Reservation::find($request->id);
-        $reservation->utilisateur_id = $request->utilisateur_id;
+
+        if($reservation == null){
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
+        }
+
+        $reservation->utilisateur_id = $request->input('utilisateur_id');
         $reservation->salle_id = $request->input('salle_id');
         $reservation->date_reservation = $request->input('date_reservation');
         $reservation->date_periode = $request->input('reservation_periode');
         $reservation->reservation_statut = $request->input('reservation_statut');
         $reservation->save();
 
-        return redirect()->route('reservation_show', ['id' => $reservation->id]);
+        return redirect()->route('reservation.show', ['id' => $reservation->reservation_id])->with('success', 'Reservation updated');
     }
 
     public function delete(Request $request){
@@ -66,12 +72,12 @@ class ReservationControllerForm extends Controller
         }
 
         $request->validate([
-            'reservation_id' => 'required|integer',
+            'reservation_id' => 'required|int',
         ]);
 
         $reservation = \App\Models\Reservation::find($request->reservation_id);
         $reservation->delete();
 
-        return redirect()->route('reservation_dashboard');
+        return redirect()->route('reservation.dashboard');
     }
 }

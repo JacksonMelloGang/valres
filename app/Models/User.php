@@ -26,7 +26,7 @@ class User extends Authenticatable
         'prenom',
         'mail',
         'username',
-        'role_id',
+        'id_role',
         'is_banned'
     ];
 
@@ -58,16 +58,21 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\Client', 'utilisateur_id');
     }
 
+    public function reservations(){
+        return $this->hasMany('App\Models\Reservation', 'utilisateur_id');
+    }
+
     public function hasRole($role){
         if($this->role()->where('libelle', $role)->first()){
             return true;
         }
+
         return false;
     }
 
     public function isAdministrateur(){
         // get service from administration table based on utilisateur_id
-        $role = Role::where('id_role', $this->role_id)->first();
+        $role = Role::where('id_role', $this->id_role)->first();
 
         if($role == null){
             return false;
@@ -83,7 +88,7 @@ class User extends Authenticatable
 
     public function isResponsable(){
         // get service from administration table based on utilisateur_id
-        $role = Role::where('id_role', $this->role_id)->first();
+        $role = Role::where('id_role', $this->id_role)->first();
 
         if($role == null){
             return false;
@@ -100,7 +105,7 @@ class User extends Authenticatable
 
     public function isSecretaire(){
         // get service from administration table based on utilisateur_id
-        $role = Role::where('id_role', $this->role_id)->first();
+        $role = Role::where('id_role', $this->id_role)->first();
 
         if($role == null){
             return false;

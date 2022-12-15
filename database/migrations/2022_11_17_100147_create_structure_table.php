@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id('structure_id');
             $table->text('structure_nom');
             $table->text('structure_adresse');
-            $table->unsignedBigInteger('categorie_id');
+            $table->unsignedBigInteger('cat_id');
 
-            $table->foreign('categorie_id')->references('categorie_id')->on('categorie_structure');
+            $table->foreign('cat_id')->references('cat_id')->on('categorie_structure');
         });
     }
 

@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'mail' => 'torphy.emile@example.org',
             'username' => 'durgan.tierra',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'role_id' => 1,
+            'id_role' => 1,
             'is_banned' => false
         ]);
 
@@ -32,7 +32,7 @@ class UserSeeder extends Seeder
             'mail' => 'sswift@example.net',
             'username' => 'marvin.rahsaan',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'role_id' => 2,
+            'id_role' => 2,
             'is_banned' => false
         ]);
 
@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             'prenom' => 'Christian',
             'mail' => 'malcolm.kassulke@example.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'role_id' => 3,
+            'id_role' => 3,
             'is_banned' => false
         ]);
 
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'prenom' => 'CLEMENT',
             'mail' => 'cbandilella@llgvolleyball.fr',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-            'role_id' => 4,
+            'id_role' => 4,
             'is_banned' => true
         ]);
 

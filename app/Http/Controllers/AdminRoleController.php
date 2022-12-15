@@ -19,7 +19,7 @@ class AdminRoleController extends Controller
         $role = \App\Models\Role::find($id);
 
         if($role == null){
-            return redirect()->route('admin_roles')->withErrors(['error' => 'Role not found']);
+            return redirect()->route('admin.roles')->withErrors(['error' => 'Role not found']);
         }
 
         $users = User::all()->where('id_role', $id);

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categorie_salle;
+use App\Models\ReservationStatut;
+use App\Models\Salle;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 use App\Models\Reservation;
@@ -26,24 +30,72 @@ class ReservationController extends Controller
     public function show_reservations(){
         // get all reservations
         $reservations = Reservation::all();
+        $categories_salles = Categorie_salle::all();
+
 
         return view('reservation.reservation.reservations', ['reservations' => $reservations]);
     }
 
     public function today_reservation(){
-        $reservations = Reservation::where('date_reservation', date('Y-m-d'))->get();
+        // get all reservations
+        $categories_salles = Categorie_salle::all();
 
-        return view('reservation.reservation.reservations', ['reservations' => $reservations]);
+        // current datetime
+        $current_date = date('Y-m-d 00:00:00');
+
+        // get reservations for today
+        $reservations = Reservation::where('date_reservation', $current_date)->where('reservation_statut', '=', '1')->get();
+
+        // SELECT * FROM salle WHERE salle_id IN (SELECT salle_id FROM reservation WHERE date_reservation = $current_date)
+        $salles = Salle::all();
+
+        return view('reservation.reservation.reservations', ['salles' => $salles, 'reservations' => $reservations, 'categories_salles' => $categories_salles]);
     }
 
     public function show_reservation($id){
         $reservation = Reservation::find($id);
 
         if($reservation == null){
-            return redirect()->route('reservation_dashboard')->withErrors(['error' => 'Reservation not found']);
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
         }
 
 
-        return view('reservation.reservation.reservation', ['id' => $id, 'reservation' => $reservation]);
+        return view('reservation.reservation.reservation', ['reservation' => $reservation]);
+    }
+
+    function manage_reservation(){
+        $reservations = Reservation::all();
+        $reservation_statuts = ReservationStatut::all();
+
+        return view('reservation.reservation.manage', ['reservations' => $reservations, 'reservation_statuts' => $reservation_statuts]);
+    }
+
+    function edit($id){
+        $reservation = Reservation::find($id);
+        $reservation_statuts = ReservationStatut::all();
+        $utilisateurs = User::all();
+        $salles = Salle::all();
+
+        return view('reservation.reservation.edit', ['reservation' => $reservation, 'reservation_statuts' => $reservation_statuts, 'utilisateurs' => $utilisateurs, 'salles' => $salles]);
+    }
+
+    function delete($id){
+        $reservation = Reservation::find($id);
+
+        if($reservation == null){
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
+        }
+
+        $reservation->delete();
+
+        return redirect()->route('reservation.dashboard')->with('success', 'Reservation deleted successfully');
+    }
+
+    function create_reservation(){
+        $reservation_statuts = ReservationStatut::all();
+        $utilisateurs = User::all();
+        $salles = Salle::all();
+
+        return view('reservation.reservation.create', ['reservation_statuts' => $reservation_statuts, 'utilisateurs' => $utilisateurs, 'salles' => $salles]);
     }
 }

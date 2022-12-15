@@ -18,37 +18,45 @@
                 <hr>
                 <ul class="nav nav-pills flex-column mb-auto">
                     <li class="nav-item">
-                        <a href="{{route('dashboard')}}" class="nav-link active" aria-current="page">
+                        <a href="{{route('dashboard')}}" class="nav-link text-white {{request()->routeIs('home') ? 'active' : ''}}" aria-current="page">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
                             Retour
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin_dashboard')}}" class="nav-link text-white">
+                        <a href="{{route('admin.dashboard')}}" class="nav-link text-white {{request()->routeIs('admin.dashboard') ? 'active' : ''}}">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                            Menu Admin
+                            Menu Admininistrateur
                         </a>
                     </li>
                     <li>
-                        <a href="{{route('admin_users')}}" class="nav-link text-white">
+                        <a href="{{route('admin.users')}}" class="nav-link text-white {{request()->routeIs('admin.users') ? 'active' : ''}}">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
                             Utilisateurs
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{route('admin_roles')}}" class="nav-link text-white">
+                        <a href="{{route('admin.roles')}}" class="nav-link text-white {{request()->routeIs('admin.roles') ? 'active' : ''}}">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                             Rôles
                         </a>
                     </li>
 
+                    <li>
+                        <a href="{{route('salles.show')}}" class="nav-link text-white {{request()->routeIs('salles.show') ? 'active' : ''}}">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                            Salles
+                        </a>
+                    </li>
+
+
                     <hr>
 
                     <li>
-                        <a href="{{route('reservation_dashboard')}}" class="nav-link text-white">
+                        <a href="{{route('reservation.dashboard')}}" class="nav-link text-white ">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                            Panel Reservations
+                            Menu Reservation
                         </a>
                     </li>
                 </ul>

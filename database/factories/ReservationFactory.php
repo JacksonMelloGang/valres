@@ -20,13 +20,14 @@ class ReservationFactory extends Factory
     {
         return [
             //
-            'utilisateur_id' => $this->faker->numberBetween(1, 7),
+            'utilisateur_id' => $this->faker->numberBetween(1, 6),
             'salle_id' => $this->faker->numberBetween(1, 10),
+
             'date_reservation' => $this->faker->date(),
-            'reservation_periode' => $this->faker->numberBetween(1, 3),
+            'reservation_periode' => $this->faker->numberBetween(1, 4),
+
             'reservation_commentaire' => $this->faker->text(100),
             'reservation_statut' => $this->faker->numberBetween(1, 3),
-
 
         ];
     }
