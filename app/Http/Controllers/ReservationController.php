@@ -49,7 +49,7 @@ class ReservationController extends Controller
         // SELECT * FROM salle WHERE salle_id IN (SELECT salle_id FROM reservation WHERE date_reservation = $current_date)
         $salles = Salle::all();
 
-        return view('reservation.reservation.reservations', ['salles' => $salles, 'reservations' => $reservations, 'categories_salles' => $categories_salles]);
+        return view('reservation.reservation.today', ['salles' => $salles, 'reservations' => $reservations, 'categories_salles' => $categories_salles]);
     }
 
     public function show_reservation($id){
@@ -63,6 +63,7 @@ class ReservationController extends Controller
         return view('reservation.reservation.reservation', ['reservation' => $reservation]);
     }
 
+    // validate or cancel reservation
     function manage_reservation(){
         $reservations = Reservation::all();
         $reservation_statuts = ReservationStatut::all();

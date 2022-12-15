@@ -21,6 +21,9 @@ class Reservation extends Model
         'reservation_statut' // provisoire, confirmé, annulé
     ];
 
+    protected $casts = [
+        'date_debut' => 'datetime',
+    ];
 
     public function salle(){
         return $this->belongsTo(Salle::class, 'salle_id');

@@ -8,8 +8,8 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row min-vh-100">
+    <div class="container-fluid flex-nowrap">
+        <div class="row min-vh-100 ">
             <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark col-md-2 sticky-top" style="width: 280px;">
                 <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
                     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
@@ -32,7 +32,7 @@
                     <li>
                         <a href="{{route('reservation.today')}}" class="nav-link {{request()->routeIs('reservation.today') ? 'active' : ''}} text-white">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                            Réservations d'aujourd'hui
+                            Réservations du jour
                         </a>
                     </li>
                     @if(Auth::user() != null && Auth::user()->role != 'Utilisateur')

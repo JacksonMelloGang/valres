@@ -27,7 +27,7 @@
                     <div class="d-flex align-content-center mb-1">
                         <h3 class="flex-grow-1">Liste des salles</h3>
                         @if(Auth::user()->hasRole('Administrateur'))
-                            <a href="{{ route('salle.create') }}" class="btn btn-primary">Ajouter une salle</a>
+                            <a href="{{ route('admin.salle.create') }}" class="btn btn-primary">Ajouter une salle</a>
                         @endif
                         <br>
                     </div>
@@ -38,6 +38,7 @@
                         <th scope="col">Numéro Salle</th>
                         <th scope="col">Nom de Salle</th>
                         <th scope="col">Catégorie de la Salle</th>
+                        <th scope="col">Actions</th>
                     </thead>
                     <!-- Table Body -->
                     @foreach($salles as $salle)
@@ -78,7 +79,13 @@
                                     </div>
                                 </td>
                             @else
-                                <td></td>
+                                <td>
+                                    <a href="{{ route('salle.show', ['id' => $salle->salle_id])}}" class="btn btn-primary">Consulter</a>
+
+                                </td>
+                                <td>
+                                    <a href="{{ route('reservation.create')}}" class="btn btn-success">Réserver</a>
+                                </td>
                             @endif
 
                         </tr>

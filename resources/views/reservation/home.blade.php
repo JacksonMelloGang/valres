@@ -20,9 +20,9 @@
 
 
         <div class="text-black text-center mb-2">
-            <div class="card bg-warning">RAPPEL: <br>Periode 1: 8h00 - 12h00 <br> Période 2: 13h00 - 19h00 <br> Période 3: 19h00 - 22h00</div>
+            <div class="card bg-warning">RAPPEL:<br>Periode 1: 8h00 - 12h00 <br> Période 2: 13h00 - 19h00 <br> Période 3: 19h00 - 22h00</div>
         </div>
-        <a class="btn btn-success" href="{{route('reservation.create')}}">Ajouter une réservation</a>
+        <a class="btn btn-success" href="{{route('reservation.create')}}">Enregistrer une réservation</a>
         <table class="table">
             <thead>
             <tr>

@@ -31,6 +31,7 @@ class LoginController extends Controller
         // attempt to log in with username and password
         $credentials = $request->only('username', 'password');
 
+
         // attempt to log in
         if(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password'], 'is_banned' => 0])){
             $request->session()->regenerate();
@@ -38,10 +39,9 @@ class LoginController extends Controller
             return redirect()->intended('dashboard');
         }
 
-
         return back()->withErrors([
-            'error' => 'The provided credentials do not match our records.',
-        ])->onlyInput('username');
+            'error' => 'Mauvais Identifiant / Mot de passe ou bien votre compte a été banni.',
+        ]);
 
     }
 

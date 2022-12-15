@@ -6,9 +6,13 @@
             <div class="card">
                 <div class="card-header">{{ __('Dashboard') }}</div>
                 <div class="card-body d-flex justify-content-around">
-                    @if (isset($error))
-                        <div class="alert alert-danger" role="alert">
-                            {{ $error }}
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
                         </div>
                     @endif
 

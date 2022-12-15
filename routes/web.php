@@ -70,6 +70,8 @@ Route::group(['middleware' => ['auth']], function(){
     // user
     Route::get('/user/profile', [UtilisateurController::class, 'show_profile'])->name('user.profile');
 
+
+    Route::post('/get/reservation', [ReservationControllerForm::class, 'get_reservation'])->name('reservation.get');
 });
 
 // include admin routes
