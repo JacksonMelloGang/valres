@@ -57,21 +57,23 @@ Route::group(['middleware' => ['auth']], function(){
 
     /** Consult reservations **/
     Route::get('/reservations', [ReservationController::class, 'show_reservations'])->name('reservations.show');
-    Route::get('/reservation/{id}', [ReservationController::class, 'show_reservation'])->name('reservation.show');
+    Route::get('/reservation/{id}', [ReservationController::class, 'show_reservation'])->name('reservation.show')->where('id', '[0-9]+');
+    Route::get('/reservation/create', [ReservationController::class, 'create_reservation'])->name('reservation.create');
 
     /** Consult salles **/
     Route::get('/salles', [SalleController::class, 'show_salles'])->name('salles.show');
-    Route::get('/salle/{id}', [SalleController::class, 'show_salle'])->name('salle.show');
+    Route::get('/salle/{id}', [SalleController::class, 'show_salle'])->name('salle.show')->where('id', '[0-9]+');
 
     /**  Consult structures **/
     Route::get('/structures', [StructureController::class, 'show_structures'])->name('structures.show');
-    Route::get('/structure/{id}', [StructureController::class, 'show_structure'])->name('structure.show');
+    Route::get('/structure/{id}', [StructureController::class, 'show_structure'])->name('structure.show')->where('id', '[0-9]+');
 
     // user
     Route::get('/user/profile', [UtilisateurController::class, 'show_profile'])->name('user.profile');
 
 
     Route::post('/get/reservation', [ReservationControllerForm::class, 'get_reservation'])->name('reservation.get');
+    Route::post('/reservation/create', [ReservationControllerForm::class, 'create'])->name('reservation_create_form');
 });
 
 // include admin routes

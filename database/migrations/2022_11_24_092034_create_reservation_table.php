@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('salle_id');
             $table->dateTime('date_reservation');
             $table->integer('reservation_periode');
-            $table->string('reservation_commentaire');
+            $table->string('reservation_commentaire')->nullable();
             $table->unsignedBigInteger('reservation_statut'); // provisoire, confirmé, annulé
 
             $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');

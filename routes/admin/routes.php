@@ -21,7 +21,7 @@ Route::middleware(['auth', 'admin.auth'])->group(function(){
 
     Route::get('/admin/user/create', [AdminUtilisateurController::class, 'create_user'])->name('admin.user.create');
 
-    Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_user'])->name('admin.user.show');
+    Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_user'])->name('admin.user.show')->where('id', '[0-9]+');
 
     Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit_user'])->name('admin.user.edit');
 
@@ -29,18 +29,18 @@ Route::middleware(['auth', 'admin.auth'])->group(function(){
     // Roles
     Route::get('/admin/roles', [AdminRoleController::class, 'show_roles'])->name('admin.roles');
 
-    Route::get('/admin/role/{id}', [AdminRoleController::class, 'show_role_id'])->name('admin.role.show');
+    Route::get('/admin/role/{id}', [AdminRoleController::class, 'show_role_id'])->name('admin.role.show')->where('id', '[0-9]+');
 
     // Salles
     Route::get('/admin/salle/create', [SalleController::class, 'create_salle'])->name('admin.salle.create');
 
-    Route::get('/admin/salle/{id}/edit', [SalleController::class, 'edit_salle'])->name('admin.salle.edit');
+    Route::get('/admin/salle/{id}/edit', [SalleController::class, 'edit_salle'])->name('admin.salle.edit')->where('id', '[0-9]+');
 
 
     // Structures
     Route::get('/admin/structure/create', [AdminStructureController::class, 'create_structure'])->name('admin.structure.create');
 
-    Route::get('/admin/structure/{id}/edit', [AdminStructureController::class, 'edit_structure'])->name('admin.structure.edit');
+    Route::get('/admin/structure/{id}/edit', [AdminStructureController::class, 'edit_structure'])->name('admin.structure.edit')->where('id', '[0-9]+');
 
     // path form requests: /admin/user
     Route::post('/admin/user/create', [AdminUtilisateurFormController::class, 'create_user']);

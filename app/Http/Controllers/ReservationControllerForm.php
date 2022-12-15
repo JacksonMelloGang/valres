@@ -26,11 +26,12 @@ class ReservationControllerForm extends Controller
         $reservation->utilisateur_id = $request->utilisateur_id;
         $reservation->salle_id = $request->input('salle_id');
         $reservation->date_reservation = $request->input('date_reservation');
-        $reservation->date_periode = $request->input('reservation_periode');
+        $reservation->reservation_periode = $request->input('reservation_periode');
+        $reservation->reservation_commentaire = $request->input('reservation_commentaire');
         $reservation->reservation_statut = $request->input('reservation_statut');
         $reservation->save();
 
-        return redirect()->route('reservation.show', ['id' => $reservation->id]);
+        return redirect()->route('reservation.show', ['id' => $reservation->reservation_id]);
     }
 
     public function edit(Request $request){
