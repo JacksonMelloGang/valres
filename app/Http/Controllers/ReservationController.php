@@ -12,8 +12,6 @@ use App\Models\Reservation;
 
 class ReservationController extends Controller
 {
-
-
     public function index(){
 
         // get informations about reservations like latest reservation...
@@ -56,7 +54,7 @@ class ReservationController extends Controller
         $reservation = Reservation::find($id);
 
         if($reservation == null){
-            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation introuvable']);
         }
 
 
@@ -84,12 +82,12 @@ class ReservationController extends Controller
         $reservation = Reservation::find($id);
 
         if($reservation == null){
-            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation introuvable']);
         }
 
         $reservation->delete();
 
-        return redirect()->route('reservation.dashboard')->with('success', 'Reservation deleted successfully');
+        return redirect()->route('reservation.dashboard')->with('success', 'Réservation supprimé avec succès');
     }
 
     function create_reservation(){

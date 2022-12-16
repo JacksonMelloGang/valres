@@ -53,7 +53,7 @@ class ReservationControllerForm extends Controller
         $reservation = \App\Models\Reservation::find($request->reservation_id);
 
         if($reservation == null){
-            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation not found']);
+            return redirect()->route('reservation.dashboard')->withErrors(['error' => 'Reservation introuvable']);
         }
 
         $reservation->utilisateur_id = $request->input('utilisateur_id');

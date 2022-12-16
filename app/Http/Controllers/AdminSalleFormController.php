@@ -39,7 +39,7 @@ class AdminSalleFormController extends Controller
         $salle = \App\Models\Salle::find($request->salle_id);
 
         if($salle == null){
-            return redirect()->route('salles.show')->withErrors(['error' => 'Salle not found']);
+            return redirect()->route('salles.show')->withErrors(['error' => 'Salle introuvable']);
         }
 
         $salle->salle_nom = $request->salle_nom;
@@ -63,7 +63,7 @@ class AdminSalleFormController extends Controller
 
 
         if($salle == null){
-            return redirect()->route('salles.show')->withErrors(['error' => 'Salle not found']);
+            return redirect()->route('salles.show')->withErrors(['error' => 'Salle introuvable']);
         }
 
         // check if linked to any reservation
