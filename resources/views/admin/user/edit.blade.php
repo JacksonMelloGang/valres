@@ -54,7 +54,7 @@
                                 @if($structure == null)
                                     <td>Non renseigné</td>
                                 @else
-                                    <td>{{$structure->stucture_nom}}</td>
+                                    <td>{{$structure->structure_nom}}</td>
                                 @endif
                             </tr>
                             <tr>
@@ -108,9 +108,13 @@
                                     <label>{{ __('Email') }}</label>
                                     <input type="text" class="form-control" name="mail" value="{{ $utilisateur->mail }}">
                                     <label>{{__('Role')}}</label>
-                                    <select class="form-control" name="role">
+                                    <select class="form-control" name="userrole">
                                         @foreach($roles as $role)
-                                            <option value="{{$role->id_role}}">{{$role->libelle}}</option>
+                                            @if($role->id_role == $utilisateur->id_role)
+                                                <option value="{{$role->id_role}}" selected>{{$role->libelle}}</option>
+                                            @else
+                                                <option value="{{$role->id_role}}">{{$role->libelle}}</option>
+                                            @endif
                                         @endforeach
                                     </select>
                                 </div>
@@ -129,7 +133,7 @@
                                     </select>
 
                                     <label>{{__('Structure')}}</label>
-                                    <select class="form-control" name="role">
+                                    <select class="form-control" name="structurerole")>
                                         @foreach($structures as $st)
                                             <option value="{{$st->structure_id}}">{{$st->structure_nom}}</option>
                                         @endforeach

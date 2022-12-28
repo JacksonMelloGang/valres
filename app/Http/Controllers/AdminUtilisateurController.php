@@ -77,6 +77,7 @@ class AdminUtilisateurController extends Controller
         // get role of user
         $role = $user->role()->first();
 
+
         // get client based on user id
         $client = $user->client()->first();
         if($client != null){

@@ -22,6 +22,16 @@ class ReservationControllerForm extends Controller
             'reservation_statut' => 'required|integer',
         ]);
 
+        // check if there isn't already a reservation for this salle at this date
+        $reservation = \App\Models\Reservation::where('salle_id', $request->salle_id)
+            ->where('date_reservation', $request->date_reservation)
+            ->where('reservation_periode', $request->reservation_periode)
+            ->first();
+
+        if($reservation){
+            return response('Reservation already exists', 409);
+        }
+
         $reservation = new \App\Models\Reservation();
         $reservation->utilisateur_id = $request->utilisateur_id;
         $reservation->salle_id = $request->input('salle_id');

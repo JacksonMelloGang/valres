@@ -23,8 +23,7 @@ Route::middleware(['auth', 'admin.auth'])->group(function(){
 
     Route::get('/admin/user/{id}', [AdminUtilisateurController::class, 'show_user'])->name('admin.user.show')->where('id', '[0-9]+');
 
-    Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit_user'])->name('admin.user.edit');
-
+    Route::get('/admin/user/{id}/edit', [AdminUtilisateurController::class, 'edit_user'])->name('admin.user.edit')->where('id', '[0-9]+');
 
     // Roles
     Route::get('/admin/roles', [AdminRoleController::class, 'show_roles'])->name('admin.roles');
@@ -36,11 +35,13 @@ Route::middleware(['auth', 'admin.auth'])->group(function(){
 
     Route::get('/admin/salle/{id}/edit', [SalleController::class, 'edit_salle'])->name('admin.salle.edit')->where('id', '[0-9]+');
 
-
     // Structures
     Route::get('/admin/structure/create', [AdminStructureController::class, 'create_structure'])->name('admin.structure.create');
 
     Route::get('/admin/structure/{id}/edit', [AdminStructureController::class, 'edit_structure'])->name('admin.structure.edit')->where('id', '[0-9]+');
+
+
+
 
     // path form requests: /admin/user
     Route::post('/admin/user/create', [AdminUtilisateurFormController::class, 'create_user']);

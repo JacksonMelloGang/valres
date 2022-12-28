@@ -8,7 +8,9 @@ class UtilisateurController extends Controller
 {
     //
     function show_profile(){
-        return view('profile');
+        $user = auth()->user();
+
+        return view('profile', ['user' => $user]);
     }
 
 }

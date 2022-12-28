@@ -30,7 +30,7 @@
                         <br>
                     </div>
 
-                <table class="table table-striped mt-2">
+                <table class="table table-striped table-secondary mt-2">
                     <!-- Table Headings -->
                     <thead>
                     <th scope="col">Id</th>
@@ -89,7 +89,8 @@
                                             <li>
                                                 <form action="{{url('/admin/user/delete')}}" method="POST">
                                                     @csrf
-                                                    <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-id="{{ $user->utilisateur_id }}">Supprimer</button>
+                                                    <input type="hidden" value="{{ $user->utilisateur_id }}" name="id">
+                                                    <button class="dropdown-item"  type="submit">Supprimer</button>
                                                 </form>
                                             </li>
                                             @if($user->is_banned == 1)

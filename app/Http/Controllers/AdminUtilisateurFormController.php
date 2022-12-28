@@ -66,12 +66,14 @@ class AdminUtilisateurFormController extends Controller
     function update_user(Request $request){
         $request->validate([
             'id' => 'required|int',
-            'nom' => 'required',
-            'prenom' => 'required',
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
             'username' => 'required',
             'mail' => 'required|email',
-            'role' => 'required',
-            'isbanned' => 'required',
+            'userrole' => 'required|int',
+            'structurerole' => 'required_if:userrole,==,4',
+            'password' => 'nullable|string',
+            'isbanned' => 'required|boolean',
         ]);
 
         $user = User::find($request->id);
@@ -80,14 +82,48 @@ class AdminUtilisateurFormController extends Controller
             return redirect()->back()->withErrors(['Utilisateur introuvable']);
         }
 
+        // check if user is trying to change his own role
+        if($user->utilisateur_id == Auth::user()->utilisateur_id){
+            if($user->id_role != $request->role){
+                return redirect()->back()->withErrors(['Vous ne pouvez pas changer votre propre rôle']);
+            }
+        }
+
+
+        // crypt password if it's not null & update it
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->mail = $request->mail;
         $user->username = $request->username;
-        $user->id_role = $request->role;
+        $user->id_role = $request->userrole;
         $user->is_banned = $request->isbanned;
 
+        if($request->password != null){
+            $user->password = Hash::make($request->password);
+        }
+
         $user->save();
+
+        // check if user has a client
+        $client = $user->client;
+        if($client != null) {
+            // if user is a client, update it
+            $client->structure_id = $request->structurerole;
+            $client->save();
+        } else {
+            // if user is not a user anymore, delete it
+            if($user->id_role != 4){
+                $client->delete();
+            } else {
+                // else create a new client
+                $client = new \App\Models\Client();
+                $client->utilisateur_id = $request->id;
+                $client->structure_id = $request->structurerole;
+                $client->save();
+            }
+        }
+
+
         return redirect()->back()->with(['success' => 'Utilisateur mis à jour avec succès']);
     }
 

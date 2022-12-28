@@ -14,11 +14,11 @@ class Client extends Model
     protected $fillable = [];
 
     public function user(){
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo('App\Models\User', 'utilisateur_id');
     }
 
     public function structure(){
-        return $this->belongsTo('App\Models\Structure');
+        return $this->belongsTo('App\Models\Structure', 'structure_id');
     }
 
 }

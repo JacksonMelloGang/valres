@@ -29,9 +29,11 @@ class ReservationController extends Controller
         // get all reservations
         $reservations = Reservation::all();
         $categories_salles = Categorie_salle::all();
+        $salles = Salle::all();
+        $date = date('Y-m-d 00:00:00');
 
 
-        return view('reservation.reservation.reservations', ['reservations' => $reservations]);
+        return view('reservation.reservation.reservations', ['reservations' => $reservations, 'categories_salles' => $categories_salles, 'salles' => $salles, 'date' => $date]);
     }
 
     public function today_reservation(){
