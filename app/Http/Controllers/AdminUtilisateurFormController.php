@@ -112,8 +112,11 @@ class AdminUtilisateurFormController extends Controller
             $client->structure_id = $request->structurerole;
             $client->save();
         } else {
-            // if user is not a user anymore, delete it
-            if($user->id_role != 4 || $user->id_role != 2){
+            // means that user does not have a client
+
+
+            // if user is not an utilisateur or secretariat anymore, delete it
+            if($user->client != null && ($user->id_role != 4 || $user->id_role != 2)){
                 $client->delete();
             } else {
                 // else create a new client
