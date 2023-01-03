@@ -64,10 +64,10 @@
                                                         <td></td>
                                                     @endif
                                                 @break
+                                            @endswitch
+
                         </td>
-                    @endforeach
                 </tr>
-        @endforeach
         </tbody>
     </table>
 @endsection

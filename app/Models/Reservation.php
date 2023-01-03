@@ -37,6 +37,11 @@ class Reservation extends Model
         return $this->belongsTo(ReservationStatut::class, 'reservation_statut', 'reservation_statut_id');
     }
 
+    public function periode(){
+        return $this->belongsTo(ReservationPeriode::class, 'reservation_periode', 'id_rsperiode');
+    }
+
+
     public function isCanceled(){
         // get reservation_statut where libelle = 'annulé'
         $r_statut = ReservationStatut::where('libelle', 'Annulé')->first();

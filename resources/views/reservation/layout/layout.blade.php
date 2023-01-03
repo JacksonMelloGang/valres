@@ -32,6 +32,13 @@
                     </li>
 
                     <li>
+                        <a href="{{route('reservations.show')}}" class="nav-link {{request()->routeIs('reservation.show') ? 'active' : ''}} text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                            Réservations
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{route('reservation.today')}}" class="nav-link {{request()->routeIs('reservation.today') ? 'active' : ''}} text-white">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                             Réservations du jour

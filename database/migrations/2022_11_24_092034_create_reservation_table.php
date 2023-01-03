@@ -25,6 +25,7 @@ return new class extends Migration
             $table->foreign('utilisateur_id')->references('utilisateur_id')->on('utilisateur');
             $table->foreign('salle_id')->references('salle_id')->on('salle');
             $table->foreign('reservation_statut')->references('reservation_statut_id')->on('reservation_statut');
+            $table->foreign('reservation_periode')->references('id_rsperiode')->on('reservation_periode');
 
             $table->timestamps();
         });
