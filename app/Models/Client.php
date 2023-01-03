@@ -13,7 +13,8 @@ class Client extends Model
 
     protected $fillable = [];
 
-
+    protected $primaryKey = null;
+    public $incrementing = false;
 
     public function user(){
         return $this->belongsTo('App\Models\User', 'utilisateur_id');
