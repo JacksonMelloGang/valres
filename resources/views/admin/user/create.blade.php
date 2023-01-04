@@ -67,7 +67,7 @@
             var select = document.getElementById('role');
             var div = document.getElementById('structure_div');
             select.onchange = function() {
-                if (select.value == '4') {
+                if (select.value == '4' or select.value == '2') {
                     div.style.display = 'block';
                 } else {
                     div.style.display = 'none';

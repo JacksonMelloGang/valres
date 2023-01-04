@@ -132,12 +132,14 @@
                                         <option value="1">Oui</option>
                                     </select>
 
-                                    <label>{{__('Structure')}}</label>
-                                    <select class="form-control" name="structurerole")>
-                                        @foreach($structures as $st)
-                                            <option value="{{$st->structure_id}}">{{$st->structure_nom}}</option>
-                                        @endforeach
-                                    </select>
+                                    @if($utilisateur->role->id_role == 2 || $utilisateur->role->id_role == 1)
+                                        <label>{{__('Structure')}}</label>
+                                        <select class="form-control" name="structurerole")>
+                                            @foreach($structures as $st)
+                                                <option value="{{$st->structure_id}}">{{$st->structure_nom}}</option>
+                                            @endforeach
+                                        </select>
+                                    @endif
 
                                     <label>{{ __('Mot de passe') }}</label>
                                     <input type="password" class="form-control" name="password" value="">

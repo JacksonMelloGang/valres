@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
 
             ReservationStatutSeeder::class,
+            ReservationPeriodeSeeder::class,
             ReservationSeeder::class
         ]);
 

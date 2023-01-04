@@ -56,9 +56,9 @@
                     <tbody>
                     @foreach($reservations as $reservation)
                         <tr>
-                            <td>{{ $reservation->utilisateur->nom }} {{ $reservation->utilisateur->prenom }}</td>
+                            <td><a href='{{url('admin/user/' . $reservation->utilisateur->utilisateur_id )}}'>{{$reservation->utilisateur->nom}} {{$reservation->utilisateur->prenom}}</a></td>
                             <td>{{ $reservation->date_reservation }}</td>
-                            <td>{{ $reservation->reservation_periode }}</td>
+                            <td>{{ $reservation->periode->libelle }}</td>
 
                             <td>
                                 <a href="{{ route('reservation.show', ['id' => $reservation->reservation_id]) }}" class="btn btn-primary">Consulter</a>

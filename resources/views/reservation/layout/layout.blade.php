@@ -32,13 +32,19 @@
                     </li>
 
                     <li>
+                        <a href="{{route('reservations.show')}}" class="nav-link {{request()->routeIs('reservation.show') ? 'active' : ''}} text-white">
+                            <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                            Réservations
+                        </a>
+                    </li>
+
+                    <li>
                         <a href="{{route('reservation.today')}}" class="nav-link {{request()->routeIs('reservation.today') ? 'active' : ''}} text-white">
                             <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
                             Réservations du jour
                         </a>
                     </li>
-
-                    @if(Auth::user()->role->libelle != 'Utilisateur')
+                    @if(Auth::user()->role->id_role == 3 || auth::user()->role->id_role == 1)
                         <li>
                             <a href="{{route('reservation.manage')}}" class="nav-link {{request()->routeIs('reservation.manage') ? 'active' : ''}} text-white">
                                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#calendar3"></use></svg>
@@ -47,7 +53,7 @@
                         </li>
                     @endif
 
-                    @if(Auth::user()->role->libelle == 'Administrateur')
+                    @if(Auth::user()->role->id_role == 1)
                         <hr>
                         <li>
                             <a href="{{route('admin.dashboard')}}" class="nav-link {{request()->routeIs('admin.dashboard') ? 'active' : ''}} text-white">

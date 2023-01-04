@@ -31,7 +31,8 @@ class AdminUtilisateurFormController extends Controller
             'password' => 'required',
             'role' => 'required',
 
-            'structure' => 'required_if:role,==,Utilisateur'
+            // if role is Utilisateur or Responsable, we need to specify a structure
+            'structure' => 'required_if:role,==,Utilisateur|required_if:role,==,Responsable'
         ]);
 
         // check if username is not already taken
@@ -53,7 +54,7 @@ class AdminUtilisateurFormController extends Controller
         $id = $user->utilisateur_id;
 
         // if role is Utilisateur, we need to create a new client
-        if($request->id_role == 4){
+        if($request->id_role == 4 || $request->id_role == 2){
             $client = new \App\Models\Client();
             $client->id_utilisateur = $id;
             $client->id_structure = $request->structure;
@@ -90,7 +91,6 @@ class AdminUtilisateurFormController extends Controller
         }
 
 
-        // crypt password if it's not null & update it
         $user->nom = $request->nom;
         $user->prenom = $request->prenom;
         $user->mail = $request->mail;
@@ -98,6 +98,7 @@ class AdminUtilisateurFormController extends Controller
         $user->id_role = $request->userrole;
         $user->is_banned = $request->isbanned;
 
+        // crypt password if it's not null & update it
         if($request->password != null){
             $user->password = Hash::make($request->password);
         }
@@ -111,8 +112,9 @@ class AdminUtilisateurFormController extends Controller
             $client->structure_id = $request->structurerole;
             $client->save();
         } else {
-            // if user is not a user anymore, delete it
-            if($user->id_role != 4){
+            // means that user does not have a client //
+            // if user is not an utilisateur or secretariat anymore, delete it
+            if(($user->id_role != 4 || $user->id_role != 2)){
                 $client->delete();
             } else {
                 // else create a new client

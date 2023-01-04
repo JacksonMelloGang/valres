@@ -18,13 +18,16 @@
                 <div class="card-body">
                     <p class="card-text">Date: {{ date('d/m/Y', strtotime($reservation->date)) }}</p>
                     @if($reservation->reservation_periode == 1)
-                        <p class="card-text">Heure de début: 08h00</p>
-                        <p class="card-text">Heure de fin: 12h00</p>
+                        <p class="card-text">Heure de début: 08h30</p>
+                        <p class="card-text">Heure de fin: 12h30</p>
                     @elseif($reservation->reservation_periode == 2)
-                        <p class="card-text">Heure de début: 13h00</p>
-                        <p class="card-text">Heure de fin: 19h00</p>
+                        <p class="card-text">Heure de début: 11h30</p>
+                        <p class="card-text">Heure de fin: 14h30</p>
                     @elseif($reservation->reservation_periode == 3)
-                        <p class="card-text">Heure de début: 20h00</p>
+                        <p class="card-text">Heure de début: 14h00</p>
+                        <p class="card-text">Heure de fin: 18h00</p>
+                    @elseif($reservation->reservation_periode == 4)
+                        <p class="card-text">Heure de début: 18h30</p>
                         <p class="card-text">Heure de fin: 23h00</p>
                     @endif
                 </div>
@@ -37,3 +40,13 @@
         @endforeach
     @endif
 </div>
+
+{{--
+
+
+1 => 8h30 - 12h30
+2 => 11h30 - 14h30
+3 => 14h00 - 18h00
+4 => 18h30 - 23h00
+
+--}}
