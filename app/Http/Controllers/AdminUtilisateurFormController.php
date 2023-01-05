@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,10 +55,11 @@ class AdminUtilisateurFormController extends Controller
         $id = $user->utilisateur_id;
 
         // if role is Utilisateur, we need to create a new client
-        if($request->id_role == 4 || $request->id_role == 2){
-            $client = new \App\Models\Client();
-            $client->id_utilisateur = $id;
-            $client->id_structure = $request->structure;
+        if($request->role == 4 || $request->role == 2){
+            $client = new Client();
+            $client->utilisateur_id = $id;
+            $client->structure_id = $request->structure;
+
             $client->save();
         }
 

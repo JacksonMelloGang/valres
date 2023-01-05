@@ -48,7 +48,7 @@
                             <td>Role</td>
                             <td>{{$userrole->libelle}}</td>
                         </tr>
-                        @if($userrole->libelle == 'Utilisateur')
+                        @if($userrole->libelle == 'Utilisateur' || $userrole->libelle == 'Responsable')
                             <tr>
                                 <td>Nom de la structure</td>
                                 @if($structure == null)
@@ -132,7 +132,7 @@
                                         <option value="1">Oui</option>
                                     </select>
 
-                                    @if($utilisateur->role->id_role == 2 || $utilisateur->role->id_role == 1)
+                                    @if($utilisateur->role->id_role == 2 || $utilisateur->role->id_role == 4)
                                         <label>{{__('Structure')}}</label>
                                         <select class="form-control" name="structurerole")>
                                             @foreach($structures as $st)
