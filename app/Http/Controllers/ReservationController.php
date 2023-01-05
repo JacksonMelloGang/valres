@@ -25,11 +25,13 @@ class ReservationController extends Controller
             $reservations = Reservation::where('utilisateur_id', Auth::user()->utilisateur_id)->get();
         }
 
-        $your_latest_reservation = Reservation::where('utilisateur_id', auth()->user()->utilisateur_id)->latest()->first();
-        $your_reservations = Reservation::where('utilisateur_id', auth()->user()->utilisateur_id)->get();
+        $your_latest_reservation = Reservation::where('utilisateur_id', Auth::user()->utilisateur_id)->latest()->first();
+
+        // get five latest reservations
+        $your_reservations = Reservation::where('utilisateur_id', Auth::user()->utilisateur_id)->where('reservation_statut', '1')->take(5)->get();
         $title = "Dashboard";
 
-        return view('reservation.home', ['reservations' => $reservations, 'user_latest_reservation' => $your_latest_reservation, 'title' => $title]);
+        return view('reservation.home', ['reservations' => $reservations, 'user_reservations' => $your_reservations, 'user_latest_reservation' => $your_latest_reservation, 'title' => $title]);
     }
 
     // show views
@@ -99,7 +101,7 @@ class ReservationController extends Controller
     // validate or cancel reservation
     function manage_reservation(){
         // get reservations order by date desc & reservation_statut
-        $reservations = Reservation::orderBy('date_reservation', 'desc')->orderBy('reservation_periode', 'desc')->get();
+        $reservations = Reservation::orderBy('reservation_statut', 'asc')->orderBy('date_reservation', 'desc')->orderBy('reservation_periode', 'desc')->get();
         $reservation_statuts = ReservationStatut::all();
 
         return view('reservation.reservation.manage', ['reservations' => $reservations, 'reservation_statuts' => $reservation_statuts]);

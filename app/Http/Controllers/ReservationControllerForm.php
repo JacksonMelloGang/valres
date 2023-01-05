@@ -150,7 +150,7 @@ class ReservationControllerForm extends Controller
         $reservation->reservation_statut = 1;
         $reservation->save();
 
-        return redirect()->route('reservation.dashboard')->with('success', 'La réservation a bien été approuvée');
+        return redirect()->route('reservation.manage')->with('success', 'La réservation a bien été approuvée');
     }
 
     public function reject_reservation(Request $request){
@@ -165,7 +165,7 @@ class ReservationControllerForm extends Controller
         $reservation->reservation_statut = 3;
         $reservation->save();
 
-        return redirect()->route('reservation.dashboard')->with('success', 'La réservation a bien été refusée');
+        return redirect()->route('reservation.manage')->with('success', 'La réservation a bien été refusée');
     }
 
     public function get_reservation(Request $request){

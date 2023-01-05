@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\StructureController;
+use App\Http\Controllers\UtilisateurFormController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\LoginController;
 
@@ -70,7 +71,7 @@ Route::group(['middleware' => ['auth']], function(){
 
     // user
     Route::get('/user/profile', [UtilisateurController::class, 'show_profile'])->name('user.profile');
-    Route::get('/profile', []);
+    Route::get('/profile', [UtilisateurFormController::class, 'update_profile'])->name('profile.update');
 
     // form request reservation
     Route::post('/reservation/create', [ReservationControllerForm::class, 'create'])->name('reservation_create_form');

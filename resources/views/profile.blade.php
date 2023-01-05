@@ -1,6 +1,22 @@
 @extends('layouts.app')
 @section('content')
 
+    @if($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <div class="container">
         <div class="card">
             <div class="card-header">
@@ -23,11 +39,13 @@
                     <div class="col-md-4">
                         <form action="/profile" method="POST">
                             @csrf
-                            <label class="form-label">Mot de passe: </label>
-                            <input class="form-check-input" type="text" name="mdp">
+                            <label class="form-label">Mot de passe: </label><br>
+                            <input class="form-control" type="text" name="mdp">
                             <br>
-                            <label class="form-label">Mail: </label>
-                            <input class="form-check-input" type="text" name="mail">
+                            <label class="form-label">Mail: </label><br>
+                            <input class="form-control" type="email" name="mail">
+                            <br><br>
+                            <input type="submit" class="btn btn-primary" value="Modifier">
                         </form>
                     </div>
                 </div>
