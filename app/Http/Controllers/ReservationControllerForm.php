@@ -135,7 +135,7 @@ class ReservationControllerForm extends Controller
         $reservation = \App\Models\Reservation::find($request->reservation_id);
         $reservation->delete();
 
-        return redirect()->route('reservation.dashboard');
+        return redirect()->route('reservation.manage')->with('success', 'La réservation a bien été supprimée');
     }
 
     public function approve_reservation(Request $request){

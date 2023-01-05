@@ -6,6 +6,7 @@
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\AdminRoleFormController;
 use App\Http\Controllers\AdminStructureController;
+use App\Http\Controllers\AdminStructureFormController;
 use App\Http\Controllers\AdminUtilisateurController;
 use App\Http\Controllers\AdminUtilisateurFormController;
 use App\Http\Controllers\ReservationController;
@@ -60,5 +61,9 @@ Route::middleware(['auth', 'admin.auth'])->group(function(){
     Route::post('/admin/salle/edit', [AdminSalleFormController::class, 'update_salle']);
 
     Route::post('/admin/salle/delete', [AdminSalleFormController::class, 'delete_salle']);
+
+    Route::post('/admin/structure/create', [AdminStructureFormController::class, 'create']);
+
+    Route::post('/admin/structure/delete', [AdminStructureFormController::class, 'delete']);
 });
 

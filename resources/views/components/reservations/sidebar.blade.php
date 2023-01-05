@@ -34,8 +34,15 @@
                 </a>
             </li>
 
+            <li>
+                <a href="{{route('structures.show')}}" class="nav-link {{request()->routeIs('structures.show') ? 'active' : ''}} text-white">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                    Structures
+                </a>
+            </li>
 
-            @if(Auth::user()->isAdministrateur() || auth::user()->isSecretaire())
+
+        @if(Auth::user()->isAdministrateur() || auth::user()->isSecretaire())
                 <hr>
                 <li>
                     <a href="{{route('reservation.manage')}}" class="nav-link {{request()->routeIs('reservation.manage') ? 'active' : ''}} text-white">

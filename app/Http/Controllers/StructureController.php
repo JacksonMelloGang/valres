@@ -9,7 +9,7 @@ class StructureController extends Controller
 {
     //
     function show_structures(){
-        return view('structure');
+        return view('structures', ['structures' => Structure::all()]);
     }
 
     function show_structure($id){

@@ -46,6 +46,12 @@
                                             <input type="submit" class="btn btn-danger" value="Annuler">
                                             <input type="hidden" name="reservation_id" value="{{$reservation->reservation_id}}">
                                         </form>
+                                @else
+                                        <form method="post" action="/reservation/delete">
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                                            <input type="hidden" name="reservation_id" value="{{$reservation->reservation_id}}">
+                                        </form>
                                 @endif
                             </td>
                         </tr>
