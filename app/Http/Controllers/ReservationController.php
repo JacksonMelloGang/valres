@@ -44,13 +44,21 @@ class ReservationController extends Controller
         // get all date
         $date = $request->get('date') ?? date('Y-m-d 00:00:00');
 
-        // temporarly convert date to carbon object, to get the week from a day
-        $date = Carbon::parse($date);
-        $start_date = $date->startOfWeek()->format('Y-m-d 00:00:00');
-        $end_date = $date->endOfWeek()->format('Y-m-d 23:59:59');
+        //        // temporarly convert date to carbon object, to get the week from a day
+        //        $date = Carbon::parse($date);
+        //        $start_date = $date->startOfWeek()->format('Y-m-d 00:00:00');
+        //        $end_date = $date->endOfWeek()->format('Y-m-d 23:59:59');
+        //
+        //        $reservations = Reservation::whereBetween('date_reservation', [$start_date, $end_date])->get();
 
-        $reservations = Reservation::whereBetween('date_reservation', [$start_date, $end_date])->get();
+        // get reservations from date
+        $reservations = Reservation::where('date_reservation', $date)->get();
 
+        // add one day to $date
+        $dateafter = Carbon::parse($date)->addDay()->format('Y-m-d 00:00:00');
+
+        // remove one day to $date
+        $datebefore = Carbon::parse($date)->subDay()->format('Y-m-d 00:00:00');
 
         // get periodes from reservation_periode table and insert into array
         $periodes = [];
@@ -60,7 +68,7 @@ class ReservationController extends Controller
 
         $date = date('Y-m-d 00:00:00');
         // return view
-        return view('reservation.reservation.reservations', ['reservations' => $reservations, 'categories_salles' => $categories_salles, 'salles' => $salles, 'date' => $date, 'periodes' => $periodes]);
+        return view('reservation.reservation.reservations', ['reservations' => $reservations, 'categories_salles' => $categories_salles, 'salles' => $salles, 'date' => $date, 'periodes' => $periodes, 'before' => $datebefore, 'after' => $dateafter]);
     }
 
     function search(){

@@ -22,16 +22,16 @@
             <h3>Tableau des réservations</h3>
         </div>
         <div class="card-body text-center d-flex flex-row justify-content-center">
-            <a class="btn btn-primary" href="/reservations?datevalue=1&date={{substr($date, 0, 10)}}"> < </a>
+            <a class="btn btn-primary" href="/reservations?date={{substr($before, 0, 10)}}"> < </a>
 
 
             <form action="/reservations" method="GET" class="mx-2">
-                <input type="date" name="date" min="{{date('Y-m-d')}}" value="{{$date}}" pattern="\d{4}-\d{2}-\d{2}">
+                <input type="date" name="date" min="{{date('Y-m-d')}}" value="{{$date}}" pattern="\d{4}-\d{2}-\d{2}" required>
                 @csrf
                 <button type="submit" class="btn btn-primary">Rechercher</button>
             </form>
 
-            <a class="btn btn-primary" href="/reservations?datevalue=1&date={{substr($date, 0, 10)}}"> > </a>
+            <a class="btn btn-primary" href="/reservations?date={{substr($after, 0, 10)}}"> > </a>
 
             <div class="ms-5">
                 <a class="btn btn-primary" href="{{route('reservation.create')}}">Créer une réservation</a>
