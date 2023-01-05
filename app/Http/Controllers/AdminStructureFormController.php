@@ -44,9 +44,15 @@ class AdminStructureFormController extends Controller
 
         // delete structure
         $structure = \App\Models\Structure::find($request->structure_id);
+
         // structure not found
         if($structure != null){
             return redirect()->route('structures.show')->with('error', 'Structure introuvable');
+        }
+
+        // check if any client is registred in the structure
+        if($structure->clients->count() > 0){
+            return redirect()->route('structures.show', ['id' => $structure->structure_id])->with('error', 'Impossible de supprimer une structure qui a des clients');
         }
 
         $structure->delete();
