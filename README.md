@@ -7,6 +7,17 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About Valres
+
+Valres is a school project, where students have to create a website, which allow a company 'Maison des ligues' to manage bookings as well as Administrateur,
+
+
+This website have to respect a few rules:
+    - MVC Model
+    - Security (SQL Inject, XSRF exploit, CSRF exploit...)
+    - Test
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
