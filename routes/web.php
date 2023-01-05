@@ -70,10 +70,14 @@ Route::group(['middleware' => ['auth']], function(){
 
     // user
     Route::get('/user/profile', [UtilisateurController::class, 'show_profile'])->name('user.profile');
+    Route::get('/profile', []);
 
-
-    Route::post('/get/reservation', [ReservationControllerForm::class, 'get_reservation'])->name('reservation.get');
+    // form request reservation
     Route::post('/reservation/create', [ReservationControllerForm::class, 'create'])->name('reservation_create_form');
+
+
+    // API    Route::post('/get/reservation', [ReservationControllerForm::class, 'get_reservation'])->name('reservation.get');
+
 });
 
 // include admin routes

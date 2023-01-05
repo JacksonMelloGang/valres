@@ -52,6 +52,7 @@
             @if(Auth::user()->role->id_role == 1)
 
                 <a class="btn btn-primary" href="{{route('admin.user.edit', $utilisateur->utilisateur_id)}}">Modifier</a>
+
                 @if($utilisateur->utilisateur_id != Auth::user()->utilisateur_id)
                     <form action="{{url('/admin/user/delete')}}" method="POST" class="d-inline">
                         @csrf

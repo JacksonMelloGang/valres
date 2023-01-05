@@ -77,7 +77,6 @@ class User extends Authenticatable
         if($role == null){
             return false;
         }
-
         // check if libelle of role is Administrateur
         if($role->libelle == 'Administrateur'){
             return true;
@@ -112,11 +111,12 @@ class User extends Authenticatable
         }
 
         // check if role of libelle is Secretaire
-        if($role->libelle == 'Secretaire'){
+        if($role->libelle == 'Secretariat'){
             return true;
         }
 
         return false;
     }
+
 
 }

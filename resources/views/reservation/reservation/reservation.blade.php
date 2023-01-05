@@ -68,7 +68,7 @@
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>{{ $reservation->utilisateur->email }}</td>
+                            <td>{{ $reservation->utilisateur->mail }}</td>
                         </tr>
                         <tr>
                             <td>Role</td>

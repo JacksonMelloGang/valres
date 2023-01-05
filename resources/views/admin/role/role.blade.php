@@ -4,7 +4,7 @@
     <div class="row">
 
         <h3>Rôle {{$role->libelle}}</h3>
-        <table class="table table-striped">
+        <table class="table table-striped table-secondary">
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -22,7 +22,7 @@
 
     <div class="row">
         <h3>Utilisateurs possédant le rôle</h3>
-        <table class="table table-striped">
+        <table class="table table-striped table-secondary">
             <thead>
             <tr>
                 <th scope="col">Id</th>

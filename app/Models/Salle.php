@@ -25,4 +25,17 @@ class Salle extends Model
         public function categorie(){
         return $this->belongsTo(Categorie_salle::class, 'cat_id');
     }
+
+    public static function isAvailable($id, $date, $periode){
+        $salle = Salle::findOrFail($id);
+        $reservations = $salle->reservations;
+        $isAvailable = true;
+
+        foreach($reservations as $reservation){
+            if($reservation->date_reservation == $date && $reservation->periode_id == $periode){
+                $isAvailable = false;
+            }
+        }
+        return $isAvailable;
+    }
 }

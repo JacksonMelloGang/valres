@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('utilisateur_id');
             $table->unsignedBigInteger('salle_id');
             $table->dateTime('date_reservation');
-            $table->integer('reservation_periode');
+            $table->unsignedBigInteger('reservation_periode');
             $table->string('reservation_commentaire')->nullable();
             $table->unsignedBigInteger('reservation_statut'); // provisoire, confirmé, annulé
 

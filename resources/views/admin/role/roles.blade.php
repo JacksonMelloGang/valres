@@ -2,7 +2,7 @@
 @section('content')
     <div class="container d-flex justify-content-center mt-5 ">
 
-        <table class="table table-striped">
+        <table class="table table-striped table-secondary">
             <thead>
             <tr>
                 <th scope="col">ID</th>

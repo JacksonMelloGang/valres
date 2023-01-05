@@ -11,14 +11,15 @@
         </div>
     @endif
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
     <div class="row d-flex ">
-        @if(Route::currentRouteName() == 'reservation.today')
-            <h1 class="col-12 text-center">Réservations du jour</h1>
-            <x-reservations.timed :reservations="$reservations" />
-        @else
-            <h1 class="col-12 text-center">Gestion des réservations</h1>
-            <x-reservations.table :reservations="$reservations" />
-        @endif
+        <h1 class="col-12 text-center">Réservations du jour</h1>
+        <x-reservations.timed :reservations="$reservations" />
     </div>
 
 @endsection

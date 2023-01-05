@@ -32,7 +32,7 @@
                         <br>
                     </div>
 
-                <table class="table table-striped mt-2">
+                <table class="table table-striped table-secondary mt-2">
                     <!-- Table Headings -->
                     <thead>
                         <th scope="col">Numéro Salle</th>
@@ -84,7 +84,7 @@
 
                                 </td>
                                 <td>
-                                    <a href="{{ route('reservation.create')}}" class="btn btn-success">Réserver</a>
+                                    <a href="{{ url('/reservation/create?salle='.$salle->salle_id)}}" class="btn btn-success">Réserver</a>
                                 </td>
                             @endif
 

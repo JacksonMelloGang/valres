@@ -30,7 +30,7 @@
                         <br>
                     </div>
 
-                <table class="table table-striped mt-2">
+                <table class="table table-striped table-secondary mt-2">
                     <!-- Table Headings -->
                     <thead>
                     <th scope="col">Id</th>

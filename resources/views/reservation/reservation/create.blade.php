@@ -40,7 +40,7 @@
                     <select class="form-control form-select" name="salle_id">
                         @foreach($salles as $salle)
                             {{-- if user coming from salles.show, then select salle --}}
-                            @if(Route::currentRouteName() == 'salles.show' && $salle->salle_id == $salle_id)
+                            @if($salle->salle_id == $salle_id)
                                 <option value="{{$salle->salle_id}}" selected>{{$salle->salle_nom}} - {{$salle->categorie->libelle}}</option>
                             @else
                                 <option value="{{$salle->salle_id}}">{{$salle->salle_nom}} - {{$salle->categorie->libelle}}</option>
@@ -56,10 +56,13 @@
                 <div class="form-group">
                     <label for="reservation_periode">Période</label>
                     <select class="form-control form-select" name="reservation_periode">
-                        <option value="1">Matin (8h30 - 12h30)</option>
-                        <option value="2">Midi (11h30 - 14h30)</option>
-                        <option value="3">Après-Midi (14h00 - 18h00)</option>
-                        <option value="4">Soir (18h30 - 23h00)</option>
+                        @foreach($reservations_periodes as $res_periode)
+                            @if($res_periode->id_rsperiode == $periode)
+                                <option value="{{$res_periode->id_rsperiode}}" selected>{{$res_periode->libelle}}</option>
+                            @else
+                                <option value="{{$res_periode->id_rsperiode}}">{{$res_periode->libelle}}</option>
+                            @endif
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group">

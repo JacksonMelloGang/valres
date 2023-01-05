@@ -22,4 +22,9 @@ class Structure extends Model
     public function categorie(){
         return $this->belongsTo(Categorie_structure::class, 'cat_id');
     }
+
+    public function clients(){
+        return $this->hasMany(Client::class, 'structure_id');
+    }
+
 }

@@ -27,7 +27,7 @@ class EnsureUserCanReserve
         $user = $request->user();
 
         // if responsable or secretariat, process request otherwise return 403 forbidden
-        if($user->isResponsable() || $user->isSecretaire() || $user->isAdministrateur()){
+        if($user->isSecretaire() || $user->isAdministrateur()){
             return $next($request);
         }
 

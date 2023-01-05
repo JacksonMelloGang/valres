@@ -41,12 +41,24 @@ class Reservation extends Model
         return $this->belongsTo(ReservationPeriode::class, 'reservation_periode', 'id_rsperiode');
     }
 
-
     public function isCanceled(){
         // get reservation_statut where libelle = 'annulé'
         $r_statut = ReservationStatut::where('libelle', 'Annulé')->first();
 
         if($this->reservation_statut == $r_statut->reservation_statut_id){
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function isPastToday($id){
+        $today = date('Y-m-d H:i:s');
+
+
+        $reservation = Reservation::findOrFail($id);
+
+        if($reservation->date_reservation < $today){
             return true;
         }
 

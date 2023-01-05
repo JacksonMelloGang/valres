@@ -6,7 +6,7 @@
             <h3 class="card-title">Gestion des réservations</h3>
         </div>
         <div class="card-body text-center">
-            <table class="table table-striped">
+            <table class="table table-striped table-secondary">
                 <thead>
                     <tr>
                         <th>Numero</th>
@@ -32,8 +32,21 @@
                             <td class="fw-bold">{{$reservation->statut->libelle}}</td>
 
                             <td class="align-self-end">
-                                <a href="{{url('/reservation/edit/'.$reservation->reservation_id)}}" class="btn btn-success">Approuver</a>
-                                <a href="{{url('/reservation/edit/'.$reservation->reservation_id)}}" class="btn btn-warning">Annuler</a>
+                                @if($reservation->statut->libelle == 'En attente')
+                                    <form method="post" action="/reservation/approve">
+                                        @csrf
+                                        <input type="submit" class="btn btn-success" value="Approuver">
+                                        <input type="hidden" name="reservation_id" value="{{$reservation->reservation_id}}">
+                                    </form>
+                                @endif
+
+                                @if($reservation->statut->libelle != 'Annulée')
+                                        <form method="post" action="/reservation/reject">
+                                            @csrf
+                                            <input type="submit" class="btn btn-danger" value="Annuler">
+                                            <input type="hidden" name="reservation_id" value="{{$reservation->reservation_id}}">
+                                        </form>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

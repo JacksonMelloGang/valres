@@ -38,15 +38,7 @@
                     <td>{{ $reservation->utilisateur->nom }}  {{$reservation->utilisateur->prenom}}</td>
                     <td>{{ $reservation->salle->salle_nom }}</td>
                     <td>{{ $reservation->date_reservation }}</td>
-                    @if($reservation->reservation_periode == 1)
-                        <td>8h30 - 12h30</td>
-                    @elseif($reservation->reservation_periode == 2)
-                        <td>11h30 - 14h30</td>
-                    @elseif($reservation->reservation_periode == 3)
-                        <td>14h00 - 18h00</td>
-                    @elseif($reservation->reservation_periode == 4)
-                        <td>18h30 - 23h00</td>
-                    @endif
+                    <td>{{$reservation->periode->libelle}}</td>
                     <td>{{ $reservation->statut->libelle }}</td>
                     <td>
                         <div class="d-flex flex-row">
