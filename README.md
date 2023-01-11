@@ -15,7 +15,11 @@ Valres is a school project, where students have to create a website, which allow
 This website have to respect a few rules:
     - MVC Model
     - Security (SQL Inject, XSRF exploit, CSRF exploit...)
-    - Test
+    - Testing
+    - Accessibility...
+
+
+To respond to that, we decided to use Laravel, a framework in PHP Object, where we build our website on top of that using Bootstrap & nodejs.
 
 
 ## About Laravel
