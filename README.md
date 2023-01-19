@@ -9,7 +9,7 @@
 
 ## About Valres
 
-Valres is a school project, where students have to create a website, which allow a company 'Maison des ligues' to manage bookings as well as Administrateur,
+Valres is a school project, where students have to create a website, which allow a company 'Maison des ligues' to manage bookings as well as manage users, or room etc...,
 
 
 This website have to respect a few rules:
