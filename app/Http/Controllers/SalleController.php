@@ -46,4 +46,10 @@ class SalleController extends Controller
     }
 
 
+    function api_salles(){
+        $salles = Salle::orderBy('salle_id', 'asc')->get();
+
+        return response()->json($salles);
+    }
+
 }
