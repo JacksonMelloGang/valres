@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\Route;
 
 
 // create route with controller to display a list of salles with json
-Route::get('/v1/salles', [SalleController::class, 'salles'])
-    ->name('api.salles');
+Route::get('/salles', [SalleController::class, 'salles'])
+    ->name('api.salles.show');
 
 // create route with controller to display a salle info with json.
-Route::get('/v1/salle/{id}', [SalleController::class, 'salle'])
-    ->name('api.salle');
+Route::get('/salle/{id}', [SalleController::class, 'salle'])
+    ->name('api.salle.show');

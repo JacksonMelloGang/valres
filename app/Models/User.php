@@ -126,4 +126,27 @@ class User extends Authenticatable
         return $this->api_token;
     }
 
+    public function removeToken(){
+        $this->api_token = null;
+        $this->save();
+    }
+
+    public function isBanned(){
+        return $this->is_banned;
+    }
+
+    public function ban(){
+        $this->is_banned = true;
+        $this->save();
+    }
+
+    public function unban(){
+        $this->is_banned = false;
+        $this->save();
+    }
+
+    public function getToken(){
+        return $this->api_token;
+    }
+
 }

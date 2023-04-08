@@ -18,5 +18,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-include __DIR__ . '/api\v1\salles.php';
+Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
+    include __DIR__ . '/api\v1\roles.php';
+    include __DIR__ . '/api\v1\structures.php';
+    include __DIR__ . '/api\v1\reservations.php';
+    include __DIR__ . '/api\v1\salles.php';
+});
 
