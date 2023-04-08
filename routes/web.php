@@ -81,10 +81,10 @@ Route::group(['middleware' => ['auth']], function(){
 });
 
 // include admin routes
-include __DIR__ . '/admin\routes.php';
+include __DIR__ . '/web\admin\routes.php';
 
 // include reservation routes (require canReserve permission)
-include __DIR__ . '/reservation\routes.php';
+include __DIR__ . '/web\reservation\routes.php';
 
 
 

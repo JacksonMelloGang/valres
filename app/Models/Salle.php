@@ -22,7 +22,7 @@ class Salle extends Model
         return $this->hasMany(Reservation::class, 'salle_id', 'salle_id');
     }
 
-        public function categorie(){
+    public function categorie(){
         return $this->belongsTo(Categorie_salle::class, 'cat_id');
     }
 

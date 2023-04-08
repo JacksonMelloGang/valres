@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\API\SalleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,5 +18,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// create route with controller to display salles with json
-Route::get('/salles', [SalleController::class, 'salles']);
+include __DIR__ . '/api\v1\salles.php';
+
