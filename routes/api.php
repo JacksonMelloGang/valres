@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => 'v1', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'v1', 'middleware' => ['api.tokencheck']], function () {
     include __DIR__ . '/api\v1\roles.php';
     include __DIR__ . '/api\v1\structures.php';
     include __DIR__ . '/api\v1\reservations.php';

@@ -25,7 +25,7 @@ class IsAPITokenGood
         // if the token is not null, check if it is good
         if ($token != null) {
             // get user by api token, if result is null, then token is invalid
-            $user = \Illuminate\Foundation\Auth\User::all()->where('api_token', $token)->first();
+            $user = User::all()->where('api_token', $token)->first();
             if($user != null){
                 $IsTokenValid = true;
             }

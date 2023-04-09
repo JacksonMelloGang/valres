@@ -12,7 +12,7 @@ class SalleController extends Controller
     function salles(Request $request){
         // get all salles with their categorie's libelle
         $salles = Salle::orderBy('salle_id', 'asc')->get();
-        
+
         return response()->json($salles);
     }
 
