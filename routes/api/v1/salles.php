@@ -11,3 +11,4 @@ Route::get('/salles', [SalleController::class, 'salles'])
 // create route with controller to display a salle info with json.
 Route::get('/salle/{id}', [SalleController::class, 'salle'])
     ->name('api.salle.show');
+

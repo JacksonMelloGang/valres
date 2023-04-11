@@ -20,6 +20,11 @@ class SalleController extends Controller
     function salle($id){
         $salle = Salle::where('salle_id', $id)->first();
 
+        // get current date with format 'Y-m-d'
+        $date = date('Y-m-d');
+
+        $salle->isAvailable($id, $date, 1);
+
         return response()->json($salle);
     }
 
