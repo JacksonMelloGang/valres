@@ -23,9 +23,9 @@ class SalleController extends Controller
         // get current date with format 'Y-m-d'
         $date = date('Y-m-d');
 
-        $salle->isAvailable($id, $date, 1);
+        $available = $salle->isAvailable($id, $date, 1);
 
-        return response()->json($salle);
+        return response()->json($salle, $available);
     }
 
 }

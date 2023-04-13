@@ -119,6 +119,10 @@ class User extends Authenticatable
         return false;
     }
 
+    public function hasToken(){
+        return $this->api_token ?? null;
+    }
+
     public function generateToken(){
         $this->api_token = bin2hex(random_bytes(30));
         $this->save();
@@ -149,6 +153,6 @@ class User extends Authenticatable
         return $this->api_token;
     }
 
-    
+
 
 }
