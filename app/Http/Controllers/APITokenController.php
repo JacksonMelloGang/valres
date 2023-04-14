@@ -27,11 +27,11 @@ class APITokenController extends Controller
 
 
         if($user == null){
-            return response()->json(['error' => 'Invalid credentials', 'code' => "0"], 404);
+            return response()->json(['error' => 'Invalid credentials', 'code' => "0"], 204);
         }
 
         if(!Hash::check($password, $user->password)){
-            return response()->json(['error' => 'Invalid credentials', 'code' => "0"], 404);
+            return response()->json(['error' => 'Invalid credentials', 'code' => "0"], 204);
         }
 
         $token = null;

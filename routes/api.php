@@ -25,5 +25,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['api.tokencheck']], function ()
     include __DIR__ . '/api\v1\structures.php';
     include __DIR__ . '/api\v1\reservations.php';
     include __DIR__ . '/api\v1\salles.php';
+    include __DIR__ . '/api\v1\categories.php';
+
 });
 

@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class reservations.table extends Component
+class reservations extends Component
 {
     /**
      * Create a new component instance.
