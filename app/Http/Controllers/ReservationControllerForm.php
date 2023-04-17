@@ -74,7 +74,7 @@ class ReservationControllerForm extends Controller
             }
 
 
-            if(($user->isAdministrateur() == false || $user->isSecretaire() == false) == false){
+            if(($user->isAdministrateur() || $user->isSecretaire()) == false){
                 return response('User is not an administrator or a secretary', 403);
             }
         }
