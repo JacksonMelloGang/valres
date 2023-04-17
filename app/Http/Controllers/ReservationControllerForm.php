@@ -73,7 +73,8 @@ class ReservationControllerForm extends Controller
                 return response('User not found', 404);
             }
 
-            if(!$user->isAdministrateur() || !$user->isSecretaire()){
+
+            if(($user->isAdministrateur() == false || $user->isSecretaire() == false) == false){
                 return response('User is not an administrator or a secretary', 403);
             }
         }
