@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Categorie_salle;
 use App\Models\Salle;
 use Illuminate\Support\Facades\Request;
 
@@ -17,15 +18,18 @@ class SalleController extends Controller
     }
 
 
-    function salle($id){
+    function salle(Request $request, $id){
         $salle = Salle::where('salle_id', $id)->first();
 
         // get current date with format 'Y-m-d'
         $date = date('Y-m-d');
+        $reservationperiode = $request->input('reservation_periode') ?? 1;
 
-        $available = $salle->isAvailable($id, $date, 1);
+        $available = $salle->isAvailable($id, $date, $reservationperiode);
 
-        return response()->json($salle, $available);
+        $category = Categorie_salle::where('cat_id', $salle->cat_id)->first();
+
+        return response()->json(['salle' => $salle, 'category' => $category, 'available' => $available]);
     }
 
 }
