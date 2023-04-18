@@ -78,6 +78,7 @@ class User extends Authenticatable
         if($role == null){
             return false;
         }
+
         // check if libelle of role is Administrateur
         if($role->libelle == 'Administrateur'){
             return true;
