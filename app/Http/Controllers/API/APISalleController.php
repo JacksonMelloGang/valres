@@ -7,10 +7,10 @@ use App\Models\Categorie_salle;
 use App\Models\Salle;
 use Illuminate\Support\Facades\Request;
 
-class SalleController extends Controller
+class APISalleController extends Controller
 {
 
-    function salles(Request $request){
+    function salles(){
         // get all salles with their categorie's libelle
         $salles = Salle::orderBy('salle_id', 'asc')->get();
 

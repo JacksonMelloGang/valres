@@ -17,9 +17,11 @@ return new class extends Migration
             $table->id();
             $table->integer('code', false, false);
             $table->unsignedBigInteger('salleId');
-            $table->timestamps();
+            $table->integer('month')->default(date('m'));
+            $table->year('year')->default(date('Y'));
 
             $table->foreign('salleId')->references('salle_id')->on('salle')->onDelete('CASCADE')->onUpdate('CASCADE');
+            
         });
     }
 

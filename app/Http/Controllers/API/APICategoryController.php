@@ -1,18 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
 use App\Models\Categorie_salle;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class CategoryController extends Controller
+class APICategoryController extends Controller
 {
     //
     public function categories(){
 
         $categories = Categorie_salle::all();
 
-        return response()->json(['categories' => $categories, 'code' => "1"]);
+        $categoryArray = [];
+
+        for($i = 0; $i < count($categories); $i++){
+            $categoryArray[$i] = $categories[$i];
+        }
+
+        return response()->json(['categories' => $categoryArray]);
     }
 
     public function category(Request $request){
