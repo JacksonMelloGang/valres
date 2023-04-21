@@ -22,7 +22,7 @@ class Salle extends Model
         return $this->hasMany(Reservation::class, 'salle_id', 'salle_id');
     }
 
-        public function categorie(){
+    public function categorie(){
         return $this->belongsTo(Categorie_salle::class, 'cat_id');
     }
 
@@ -37,5 +37,24 @@ class Salle extends Model
             }
         }
         return $isAvailable;
+    }
+
+    public function digicode(){
+        return $this->hasMany(Digicode::class, 'salleId', 'salle_id');
+    }
+
+    public function salle_code($year, $month){
+        $salle = Salle::findOrFail($this->salle_id);
+
+        // get code from digicode where salle_id = $this->salle_id and year = $year and month = $month
+        $digicode = $salle->digicode()->where('year', $year)->where('month', $month)->first();
+
+        if(!$digicode == null){
+            $digicode = $digicode->code;
+        } else {
+            $digicode = -1;
+        }
+        
+        return $digicode;
     }
 }

@@ -27,6 +27,8 @@ return new class extends Migration
             $table->boolean('is_banned')->default(false);
 
             $table->unsignedBigInteger('id_role')->default(4);
+            $table->string('api_token')->unique()->nullable();
+            
 
             // add updated_at & create_at
             $table->timestamps();

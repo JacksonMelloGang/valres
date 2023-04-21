@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'check.canReserve' => \App\Http\Middleware\EnsureUserCanReserve::class,
         'admin.auth' => \App\Http\Middleware\EnsureUserIsAdmin::class,
+        'api.tokencheck' => \App\Http\Middleware\IsAPITokenGood::class,
     ];
 }

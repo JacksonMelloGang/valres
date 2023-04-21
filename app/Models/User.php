@@ -38,6 +38,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'api_token'
     ];
 
     /**
@@ -77,6 +78,7 @@ class User extends Authenticatable
         if($role == null){
             return false;
         }
+
         // check if libelle of role is Administrateur
         if($role->libelle == 'Administrateur'){
             return true;
@@ -117,6 +119,41 @@ class User extends Authenticatable
 
         return false;
     }
+
+    public function hasToken(){
+        return $this->api_token ?? null;
+    }
+
+    public function generateToken(){
+        $this->api_token = bin2hex(random_bytes(30));
+        $this->save();
+
+        return $this->api_token;
+    }
+
+    public function removeToken(){
+        $this->api_token = null;
+        $this->save();
+    }
+
+    public function isBanned(){
+        return $this->is_banned;
+    }
+
+    public function ban(){
+        $this->is_banned = true;
+        $this->save();
+    }
+
+    public function unban(){
+        $this->is_banned = false;
+        $this->save();
+    }
+
+    public function getToken(){
+        return $this->api_token;
+    }
+
 
 
 }
