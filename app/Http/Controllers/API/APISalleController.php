@@ -17,7 +17,6 @@ class APISalleController extends Controller
         return response()->json($salles);
     }
 
-
     function salle(Request $request, $id){
         $salle = Salle::where('salle_id', $id)->first();
 

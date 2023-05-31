@@ -26,6 +26,10 @@ class Salle extends Model
         return $this->belongsTo(Categorie_salle::class, 'cat_id');
     }
 
+    public function batiment(){
+        return $this->belongsTo(Batiment::class, 'name');
+    }
+
     public static function isAvailable($id, $date, $periode){
         $salle = Salle::findOrFail($id);
         $reservations = $salle->reservations;

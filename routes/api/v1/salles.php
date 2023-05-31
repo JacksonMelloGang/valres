@@ -12,3 +12,6 @@ Route::get('/salles', [APISalleController::class, 'salles'])
 Route::get('/salle/{id}', [APISalleController::class, 'salle'])
     ->name('api.salle.show');
 
+Route::get('/salles/batiment/{id}', [APISalleController::class, 'salles_batiment'])
+    ->name('api.salles.batiment.show');
+
